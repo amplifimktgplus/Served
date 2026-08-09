@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse Courts — Served.</title>
+<meta name="description" content="Find and book pickleball, tennis and badminton courts across the Philippines. Filter by location, surface and price.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/a11y.css">
+</head>
+<body data-page="courts" data-nav="courts">
+
+<div id="site-nav"></div>
+
+<section class="phead">
+  <div class="shell phead__inner">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span>/</span><b>Courts</b>
+    </nav>
+    <h1>Find Your <span class="accent">Court</span></h1>
+    <p>Every court on Served is real, verified, and ready to book. Filter by location, surface or price and lock your slot in minutes.</p>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="shell">
+
+    <form class="filters" id="filters" onsubmit="return false">
+      <div class="field">
+        <label for="f-loc">Location</label>
+        <select id="f-loc"><option value="">All locations</option></select>
+      </div>
+      <div class="field">
+        <label for="f-surf">Surface</label>
+        <select id="f-surf"><option value="">Any surface</option></select>
+      </div>
+      <div class="field">
+        <label for="f-price">Max price</label>
+        <select id="f-price">
+          <option value="">Any price</option>
+          <option value="600">Up to ₱600 / hr</option>
+          <option value="700">Up to ₱700 / hr</option>
+          <option value="850">Up to ₱850 / hr</option>
+          <option value="1000">Up to ₱1,000 / hr</option>
+        </select>
+      </div>
+      <a href="#" class="btn btn--outline" id="f-reset">Reset</a>
+    </form>
+
+    <div class="result-line">
+      <span><strong id="count">0</strong> courts available</span>
+      <div class="field" style="flex-direction:row;align-items:center;gap:10px">
+        <label for="f-sort" style="white-space:nowrap">Sort by</label>
+        <select id="f-sort" style="height:42px">
+          <option value="rating">Top rated</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="listing" id="listing"></div>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

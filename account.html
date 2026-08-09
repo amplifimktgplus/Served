@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Account — Served.</title>
+<meta name="description" content="Your bookings, profile, payment methods and history.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/a11y.css">
+</head>
+<body data-page="account" data-nav="contact">
+
+<div id="site-nav"></div>
+
+<section class="phead">
+  <div class="shell phead__inner">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><b>My Account</b></nav>
+    <h1>My <span class="accent">Account</span></h1>
+    <p>Manage your bookings, payment methods and profile.</p>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="shell app">
+
+    <aside class="side">
+      <div class="side__me">
+        <span class="side__av">JD</span>
+        <span><b>Juan Dela Cruz</b><span>juan@email.com</span></span>
+      </div>
+      <nav aria-label="Account sections">
+        <button data-view="bookings" data-title="My Bookings" class="is-on">
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>My Bookings</button>
+        <button data-view="profile" data-title="Profile Settings">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile Settings</button>
+        <button data-view="payments" data-title="Payment Methods">
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18"/></svg>Payment Methods</button>
+        <button data-view="history" data-title="Booking History">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Booking History</button>
+      </nav>
+    </aside>
+
+    <div>
+      <h2 id="view-title" style="font-size:28px;font-weight:700;color:var(--navy);margin-bottom:20px">My Bookings</h2>
+
+      <!-- upcoming -->
+      <div class="view is-on" id="v-bookings">
+        <div class="bcard">
+          <img src="assets/img/venue-pickleball.jpg" alt="">
+          <div>
+            <h3>Vantage Pickleball Marikina</h3>
+            <p>Court A · 30 August 2026 · 10:00 - 11:00 · 1 hour</p>
+          </div>
+          <div style="text-align:right">
+            <span class="tag tag--ok">Upcoming</span>
+            <p style="margin-top:8px;font-size:15px;color:var(--muted)">₱700</p>
+          </div>
+        </div>
+        <div class="bcard">
+          <img src="assets/img/venue-tennis.jpg" alt="">
+          <div>
+            <h3>UP Diliman Tennis Court</h3>
+            <p>Court C · 24 August 2026 · 17:00 - 19:00 · 2 hours</p>
+          </div>
+          <div style="text-align:right">
+            <span class="tag tag--ok">Upcoming</span>
+            <p style="margin-top:8px;font-size:15px;color:var(--muted)">₱1,400</p>
+          </div>
+        </div>
+        <div class="bcard">
+          <img src="assets/img/venue-badminton.jpg" alt="">
+          <div>
+            <h3>Pico De Loro Badminton Court</h3>
+            <p>Court B · 26 August 2026 · 8:00 - 9:00 · 1 hour</p>
+          </div>
+          <div style="text-align:right">
+            <span class="tag tag--warn">Awaiting payment</span>
+            <p style="margin-top:8px;font-size:15px;color:var(--muted)">₱700</p>
+          </div>
+        </div>
+        <a class="btn btn--orange" href="courts.html"
+           style="height:48px;padding-inline:26px;border-radius:12px;font-weight:600;margin-top:8px">Book another court</a>
+      </div>
+
+      <!-- profile -->
+      <div class="view" id="v-profile">
+        <form class="panel" onsubmit="return false">
+          <div class="formgrid">
+            <div class="field"><label for="p-first">First name</label><input id="p-first" value="Juan"></div>
+            <div class="field"><label for="p-last">Last name</label><input id="p-last" value="Dela Cruz"></div>
+            <div class="field field--full"><label for="p-mail">Email</label><input id="p-mail" type="email" value="juan@email.com"></div>
+            <div class="field"><label for="p-phone">Mobile</label><input id="p-phone" value="0917 123 4567"></div>
+            <div class="field"><label for="p-city">City</label><input id="p-city" value="Marikina"></div>
+            <div class="field field--full">
+              <label for="p-sport">Preferred sport</label>
+              <select id="p-sport"><option>Pickleball</option><option>Tennis</option><option>Badminton</option></select>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <button class="btn btn--orange" style="height:48px;padding-inline:28px;border-radius:12px;font-weight:600">Save changes</button>
+            <a class="btn btn--outline" href="change-password.html" style="height:48px;padding-inline:24px;border-radius:12px;font-weight:600">Change password</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- payments -->
+      <div class="view" id="v-payments">
+        <div class="bcard" style="grid-template-columns:56px 1fr auto">
+          <span style="width:56px;height:38px;border-radius:8px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700">VISA</span>
+          <div><h3>Visa ending 4242</h3><p>Expires 04/28 · Default</p></div>
+          <span class="tag tag--ok">Active</span>
+        </div>
+        <div class="bcard" style="grid-template-columns:56px 1fr auto">
+          <span style="width:56px;height:38px;border-radius:8px;background:#eef0f3;color:var(--navy);display:grid;place-items:center;font-size:12px;font-weight:700">GCash</span>
+          <div><h3>GCash · 0917 •••• 567</h3><p>Linked 12 June 2026</p></div>
+          <span class="tag tag--past">Backup</span>
+        </div>
+        <button class="btn btn--outline" style="height:48px;padding-inline:26px;border-radius:12px;font-weight:600;margin-top:8px">Add payment method</button>
+      </div>
+
+      <!-- history -->
+      <div class="view" id="v-history">
+        <div class="tbl-wrap">
+          <div class="tbl-scroll">
+            <table class="tbl">
+              <thead><tr><th>Reference</th><th>Venue</th><th>Court</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>PB-20260712341</td><td>Vantage Pickleball Marikina</td><td>Court A</td><td>12 July 2026</td><td>₱700</td><td><span class="tag tag--past">Completed</span></td></tr>
+                <tr><td>PB-20260628902</td><td>Ortigas Smash Badminton</td><td>Court D</td><td>28 June 2026</td><td>₱1,200</td><td><span class="tag tag--past">Completed</span></td></tr>
+                <tr><td>PB-20260615118</td><td>UP Diliman Tennis Court</td><td>Court B</td><td>15 June 2026</td><td>₱1,400</td><td><span class="tag tag--past">Completed</span></td></tr>
+                <tr><td>PB-20260602447</td><td>Alabang Tennis Club</td><td>Court A</td><td>2 June 2026</td><td>₱950</td><td><span class="tag tag--warn">Refunded</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "served-homepage",
+  "private": true,
+  "type": "module",
+  "scripts": { "verify": "node verify.mjs" }
+}

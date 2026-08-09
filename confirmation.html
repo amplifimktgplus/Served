@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booking Confirmed — Served.</title>
+<meta name="description" content="Your court is booked.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/a11y.css">
+</head>
+<body data-page="confirm" data-nav="courts">
+
+<div id="site-nav"></div>
+
+<section class="sect">
+  <div class="shell">
+    <ol class="steps">
+      <li class="is-done"><b>1</b>Choose a date</li>
+      <li class="is-done"><b>2</b>Pick time &amp; court</li>
+      <li class="is-done"><b>3</b>Payment</li>
+      <li class="is-now"><b>4</b>Confirmation</li>
+    </ol>
+
+    <div class="confirm">
+      <div class="confirm__tick">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+      </div>
+      <h1>Booking Confirmed!</h1>
+      <p>Your court is served. Show this code at the venue to check in.</p>
+
+      <div class="qr"><canvas id="qr" role="img" aria-label="Check-in code"></canvas></div>
+      <p class="qr-note">Check-in code · <b id="r-ref">—</b></p>
+
+      <div class="ticket">
+        <div class="row"><span>Venue</span><b id="r-venue">—</b></div>
+        <div class="row"><span>Court</span><b id="r-court">—</b></div>
+        <div class="row"><span>When</span><b id="r-when">—</b></div>
+        <div class="row"><span>Duration</span><b id="r-dur">—</b></div>
+        <div class="row"><span>Paid</span><b id="r-total">—</b></div>
+        <div class="row"><span>Paid with</span><b id="r-method">—</b></div>
+        <div class="row"><span>Confirmation sent to</span><b id="r-mail">—</b></div>
+      </div>
+
+      <div class="confirm__cta">
+        <a class="btn btn--navy" href="account.html">View My Bookings</a>
+        <a class="btn btn--outline" href="courts.html">Book another court</a>
+      </div>
+
+      <p class="qr-note" style="margin-top:26px">
+        Demo build: the code above is a generated placeholder pattern, not a scannable QR,
+        and no confirmation email is sent.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>
