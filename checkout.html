@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Served.</title>
+<meta name="description" content="Secure checkout for your court booking.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/a11y.css">
+</head>
+<body data-page="checkout" data-nav="courts">
+
+<div id="site-nav"></div>
+
+<section class="phead">
+  <div class="shell phead__inner">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span>/</span><a href="courts.html">Courts</a><span>/</span>
+      <a href="booking-time.html">Time &amp; court</a><span>/</span><b>Payment</b>
+    </nav>
+    <h1>Secure <span class="accent">Checkout</span></h1>
+    <p>Choose how you want to pay. This is a demo build — no payment is taken.</p>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="shell">
+    <ol class="steps">
+      <li class="is-done"><b>1</b>Choose a date</li>
+      <li class="is-done"><b>2</b>Pick time &amp; court</li>
+      <li class="is-now"><b>3</b>Payment</li>
+      <li><b>4</b>Confirmation</li>
+    </ol>
+
+    <div class="pay">
+      <form class="panel" id="pay-form" novalidate>
+        <h2>Payment details</h2>
+        <p class="panel__sub">All fields are required.</p>
+
+        <div class="pay-methods" role="tablist" aria-label="Payment method">
+          <button type="button" role="tab" id="tab-gcash" data-pm="gcash"
+                  aria-controls="pm-gcash" aria-selected="false" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 5.4h3"/><path d="m9.4 13.2 1.9 1.9 3.4-3.7"/></svg>
+            <span>GCash</span>
+          </button>
+          <button type="button" role="tab" id="tab-maya" data-pm="maya"
+                  aria-controls="pm-maya" aria-selected="false" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h13.5A2.5 2.5 0 0 1 20 11v6a2.5 2.5 0 0 1-2.5 2.5H6.5A2.5 2.5 0 0 1 4 17z"/><path d="M4 11V7.6A2.1 2.1 0 0 1 6.1 5.5h9.4"/><circle cx="16.2" cy="14" r="1.3"/></svg>
+            <span>Maya</span>
+          </button>
+          <button type="button" role="tab" id="tab-qrph" data-pm="qrph"
+                  aria-controls="pm-qrph" aria-selected="false" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.4"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.4"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.4"/><path d="M14 14h3v3h-3zM20.5 14v.01M20.5 20.5v.01M17.5 20.5v.01M14 17.5v.01"/></svg>
+            <span>QR Ph</span>
+          </button>
+          <button type="button" role="tab" id="tab-bank" data-pm="bank"
+                  aria-controls="pm-bank" aria-selected="false" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 9.6 12 4.4l8.4 5.2"/><path d="M5.6 10.4v7.2M10 10.4v7.2M14 10.4v7.2M18.4 10.4v7.2"/><path d="M3.4 19.6h17.2"/></svg>
+            <span>Online banking</span>
+          </button>
+          <button type="button" role="tab" id="tab-card" data-pm="card"
+                  aria-controls="pm-card" aria-selected="false" tabindex="-1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19"/></svg>
+            <span>Card</span>
+          </button>
+        </div>
+
+        <div class="pay-panel" id="pm-gcash" role="tabpanel" aria-labelledby="tab-gcash" hidden>
+          <p class="pm-lead"><b>Demo build — no payment is taken.</b> On a live site this would hand you
+            over to GCash to approve the charge. Here, nothing is sent to GCash and no money moves.</p>
+        
+          <div class="formgrid">
+            <div class="field field--full">
+              <label for="gcash-mobile">GCash-registered mobile number</label>
+              <input id="gcash-mobile" type="tel" autocomplete="tel-national"
+                     placeholder="0917 123 4567" aria-describedby="gcash-mobile-hint gcash-mobile-err">
+              <span class="pm-hint" id="gcash-mobile-hint">11 digits starting 09. A +63 number is reformatted as you type.</span>
+              <span class="err" id="gcash-mobile-err"></span>
+            </div>
+          </div>
+        
+          <div class="pm-flow">
+            <h3>On a live site, continuing would:</h3>
+            <ol class="pm-steps">
+              <li>Send you to a <b>GCash sign-in page</b> hosted by GCash or the payment provider — never by Served.</li>
+              <li>Ask you to approve the total there, outside this site.</li>
+              <li>Bring you back here to confirm the booking.</li>
+            </ol>
+          </div>
+        
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 5 6v5.4c0 4.3 2.9 7.6 7 9.4 4.1-1.8 7-5.1 7-9.4V6z"/><path d="m9.2 12.2 2 2 3.6-3.9"/></svg>
+            <span>Your MPIN and any one-time code belong on GCash’s screen only. A checkout page should
+            never ask for them — and this one doesn’t.</span>
+          </p>
+        </div>
+
+        <div class="pay-panel" id="pm-maya" role="tabpanel" aria-labelledby="tab-maya" hidden>
+          <div class="formgrid">
+            <div class="field field--full">
+              <label for="maya-mobile">Maya-registered mobile number</label>
+              <input id="maya-mobile" type="tel" inputmode="numeric" autocomplete="tel-national"
+                     placeholder="0917 123 4567" aria-describedby="maya-mobile-hint">
+              <span class="err"></span>
+              <span class="pm-hint" id="maya-mobile-hint">The number your Maya account is registered to. Served. never asks for your Maya PIN, one-time code or card number &mdash; on a live site you would approve inside Maya itself.</span>
+            </div>
+        
+            <div class="field field--full">
+              <label for="maya-fund">Pay using</label>
+              <select id="maya-fund" aria-describedby="maya-fund-hint">
+                <option value="wallet" selected>Maya wallet balance</option>
+                <option value="card">Card linked to my Maya account</option>
+              </select>
+              <span class="err"></span>
+              <span class="pm-hint" id="maya-fund-hint">Wallet balance and a linked card are two separate Maya flows. On a live site this would decide which one opens; you would still confirm the source in the app.</span>
+            </div>
+          </div>
+
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg>
+            <span><b>Demo build &mdash; no payment is taken and nothing is sent to Maya.</b>
+            On a live site, Pay Now would hand you to Maya&rsquo;s own secure page to sign in and approve the total shown in your order summary, then return you to Served. Here it only moves you to the confirmation page.</span>
+          </p>
+        
+          <p class="pay-wait" id="maya-wait" hidden><i></i>Waiting for you to approve the request in your Maya app&hellip;</p>
+        </div>
+
+        <div class="pay-panel" id="pm-qrph" role="tabpanel" aria-labelledby="tab-qrph" hidden>
+        
+          <p class="panel__sub pm-qr__lead">
+            <b>Demo only — this code is not scannable and nothing can be charged.</b>
+            In a live build you would open a bank or e-wallet app that supports QR Ph,
+            tap <b>Scan QR</b>, and point it at the code shown here.
+          </p>
+        
+          <div class="pm-qr">
+            <div class="pm-qr__stage">
+              <div class="pm-qr__frame">
+                <canvas id="qrph-code" role="img"
+                        aria-label="Placeholder QR pattern for the demo. It is a generated graphic, not a scannable QR Ph code."></canvas>
+                <div class="pm-qr__veil">
+                  <b>Demo code expired</b>
+                  <span>The countdown ran out</span>
+                </div>
+              </div>
+              <p class="pm-qr__stamp">
+                Demo graphic — <b>not scannable</b>. It encodes nothing, so no bank or e-wallet app can read it and no payment can be made.
+              </p>
+              <button type="button" class="btn btn--outline pm-qr__again" id="qrph-refresh" hidden>
+                Generate a new demo code
+              </button>
+            </div>
+        
+            <dl class="pm-qr__facts">
+              <div>
+                <dt>Amount</dt>
+                <dd class="pm-qr__amt"><span id="qrph-amount">₱0</span></dd>
+              </div>
+              <div>
+                <dt>Pay to</dt>
+                <dd>Served.<small>demo merchant — not a registered QR Ph merchant</small></dd>
+              </div>
+              <div>
+                <dt>Reference</dt>
+                <dd><span id="qrph-ref">—</span><small>demo value, generated in your browser</small></dd>
+              </div>
+              <div>
+                <dt>Code expires in</dt>
+                <dd><span class="pm-qr__time" id="qrph-expiry">15:00</span><small>demo countdown — a live code's validity window is set by the payment provider</small></dd>
+              </div>
+            </dl>
+          </div>
+        
+          <p class="pay-wait pm-qr__wait" id="qrph-wait">
+            <i aria-hidden="true"></i>
+            <span>Waiting for payment… this demo has no server, so it will wait forever.</span>
+          </p>
+        
+          <div class="formgrid">
+            <div class="field field--full pm-qr__ack">
+              <label for="qrph-ack">
+                <span class="pm-qr__box">
+                  <input type="checkbox" id="qrph-ack">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+                </span>
+                <span><b>Demo step — nothing is verified and no money moves.</b> Tick this to let the mock flow carry on to the confirmation screen, as though a payment had been made in a banking or e-wallet app.</span>
+              </label>
+              <span class="err"></span>
+            </div>
+          </div>
+        
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.01"/></svg>
+            <span>
+              <b>Demo build — nothing is charged.</b> A live QR Ph flow needs a bank or PSP that is a
+              QR Ph participant to mint the code and to tell your server when it is paid —
+              the browser can never confirm a scan on its own, so this screen cannot know whether you paid.
+            </span>
+          </p>
+        </div>
+
+        <div class="pay-panel" id="pm-bank" role="tabpanel" aria-labelledby="tab-bank" hidden>
+        
+          <p class="panel__sub">Pay from your bank account instead of a card. You approve the transfer on your bank&rsquo;s own login page &mdash; Served. never sees your banking credentials.</p>
+        
+          <div class="formgrid">
+            <div class="field field--full">
+              <label for="bank-bank">Your bank</label>
+              <select id="bank-bank" autocomplete="off">
+                <option value="">Choose your bank</option>
+                <option value="bpi">BPI</option>
+                <option value="bdo">BDO</option>
+                <option value="unionbank">UnionBank</option>
+                <option value="metrobank">Metrobank</option>
+                <option value="landbank">LANDBANK</option>
+                <option value="rcbc">RCBC</option>
+                <option value="securitybank">Security Bank</option>
+                <option value="chinabank">China Bank</option>
+                <option value="pnb">PNB</option>
+              </select>
+              <span class="err"></span>
+            </div>
+        
+            <div class="field field--full">
+              <label for="bank-name">Name for the booking</label>
+              <input id="bank-name" type="text" autocomplete="name" placeholder="Juan Dela Cruz">
+              <span class="err"></span>
+            </div>
+          </div>
+        
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg>
+            <span><b>Demo build &mdash; no payment is taken.</b> On a live site, submitting would hand you off to your bank&rsquo;s own login page to approve the transfer. Here, nothing opens, no bank is contacted and no money moves.</span>
+          </p>
+        
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3.2 6.2 13.4h4.6L11 20.8 17.8 10.6h-4.6L13 3.2z"/></svg>
+            <span>Bank transfers for bookings are sent over InstaPay, the Philippine real-time transfer service. A booking is confirmed once your bank tells Served. the transfer went through &mdash; not at the moment you land back on this site.</span>
+          </p>
+        
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.3 5.3 6.1v5.2c0 4.2 2.9 7.5 6.7 9.4 3.8-1.9 6.7-5.2 6.7-9.4V6.1L12 3.3z"/><path d="M9.2 12.1l2 2 3.6-3.8"/></svg>
+            <span>Served. never asks for your bank username, password, PIN or OTP. Type those only on your bank&rsquo;s own page &mdash; never on a booking site.</span>
+          </p>
+        </div>
+
+        <div class="pay-panel" id="pm-card" role="tabpanel" aria-labelledby="tab-card" hidden>
+          <div class="formgrid">
+            <div class="field field--full">
+              <label for="c-name">Name on card</label>
+              <input id="c-name" type="text" autocomplete="cc-name" placeholder="Juan Dela Cruz">
+              <span class="err"></span>
+            </div>
+            <div class="field field--full">
+              <label for="c-num">Card number</label>
+              <input id="c-num" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" maxlength="19">
+              <span class="err"></span>
+            </div>
+            <div class="field">
+              <label for="c-exp">Expiry</label>
+              <input id="c-exp" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5">
+              <span class="err"></span>
+            </div>
+            <div class="field">
+              <label for="c-cvv">CVV</label>
+              <input id="c-cvv" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4">
+              <span class="err"></span>
+            </div>
+          </div>
+        
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg>
+            <span><b>Demo build &mdash; nothing is charged and no card is stored.</b> The boxes above only check the
+            shape of what you type, then move you to the confirmation page. A live site would swap them for a
+            payment provider&rsquo;s own hosted fields, so real card details would never reach Served.</span>
+          </p>
+        </div>
+
+        <div class="formgrid" style="margin-top:22px">
+          <div class="field field--full">
+            <label for="c-mail">Email for confirmation</label>
+            <input id="c-mail" type="email" autocomplete="email" placeholder="you@email.com">
+            <span class="err"></span>
+          </div>
+        </div>
+
+        <button class="btn btn--orange" type="submit"
+                style="width:100%;height:54px;border-radius:12px;font-size:17px;font-weight:600;margin-top:24px">
+          Pay Now
+        </button>
+
+      </form>
+
+      <aside class="panel summary">
+        <h2>Order summary</h2>
+        <div class="row"><span>Venue</span><b id="s-venue">—</b></div>
+        <div class="row"><span>Court</span><b id="s-court">—</b></div>
+        <div class="row"><span>When</span><b id="s-when">—</b></div>
+        <div class="row"><span>Duration</span><b id="s-dur">—</b></div>
+        <div class="row"><span>Rate</span><b id="s-rate">—</b></div>
+        <div class="row"><span>Paying with</span><b id="s-method">—</b></div>
+        <div class="total"><span>Total</span><b id="s-total">₱0</b></div>
+        <a class="btn btn--outline" href="booking-time.html"
+           style="width:100%;height:46px;border-radius:12px;margin-top:20px">Change selection</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

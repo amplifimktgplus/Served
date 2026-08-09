@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create your account — Served.</title>
+<meta name="description" content="Create your Served. account. Book your court. Start playing.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/a11y.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body data-page="auth">
+
+<main class="auth" id="main">
+
+  <aside class="auth__aside">
+    <img class="shot" src="assets/img/auth-signup.jpg" alt="" aria-hidden="true">
+    <a class="auth-back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+      Back to site
+    </a>
+    <div class="auth__glass">
+      <button class="btn btn--orange" type="button" data-focus="f-user">Register Now</button>
+      <p>Find your court. Book it. Show up. That’s it. Served cuts out the calls, the waiting, the guesswork. Just you, the game, and a slot that’s already yours. Register now.</p>
+    </div>
+  </aside>
+
+  <section class="auth__main">
+    <img class="auth__logo" src="assets/img/logo-served.png" alt="Served.">
+
+    <form class="auth-card" data-auth="signup" novalidate>
+      <h1>Get Served.</h1>
+      <p class="sub">Create your account. Book your court. Start playing.</p>
+
+      <div class="roles" role="radiogroup" aria-label="Account type">
+        <label><input type="radio" name="role" value="player" checked><span class="dot"></span><span class="lbl">I am a Player</span></label>
+        <label><input type="radio" name="role" value="owner"><span class="dot"></span><span class="lbl">I am a Court Owner</span></label>
+      </div>
+
+      <div>
+        <div class="auth-field">
+          <label class="sr-only" for="f-user">Username</label>
+          <input id="f-user" type="text" placeholder="Username" autocomplete="username" data-rule="f-user">
+          <span class="tail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        </div>
+        <span class="auth-err"></span>
+      </div>
+
+      <div>
+        <div class="auth-field">
+          <label class="sr-only" for="f-email">Email</label>
+          <input id="f-email" type="email" placeholder="Email" autocomplete="email" data-rule="f-email">
+          <span class="tail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.2"/><path d="m3.6 7 8.4 6 8.4-6"/></svg></span>
+        </div>
+        <span class="auth-err"></span>
+      </div>
+
+      <div>
+        <div class="auth-field">
+          <label class="sr-only" for="f-pw">Password</label>
+          <input id="f-pw" type="password" placeholder="Password" autocomplete="new-password" data-rule="f-pw">
+          <button class="tail" type="button" data-toggle-pw="f-pw"></button>
+        </div>
+        <span class="auth-err"></span>
+      </div>
+
+      <div>
+        <div class="auth-field">
+          <label class="sr-only" for="f-pw2">Confirm Password</label>
+          <input id="f-pw2" type="password" placeholder="Confirm Password" autocomplete="new-password" data-match="f-pw">
+          <button class="tail" type="button" data-toggle-pw="f-pw2"></button>
+        </div>
+        <span class="auth-err"></span>
+      </div>
+
+      <label class="check">
+        <input type="checkbox" data-terms>
+        <span>By continuing you indicate that you read and agreed to the Terms of Use</span>
+      </label>
+      <span class="auth-err"></span>
+
+      <button class="btn btn--orange auth-submit" type="submit">
+        Create Account
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12h7M13 9.5l2.5 2.5L13 14.5"/></svg>
+      </button>
+
+      <p class="or">Or continue with</p>
+      <div class="socials">
+        <a href="#" aria-label="Continue with Google">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.9 2.6 13.7l7.8 6.1C12.3 14 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.2-.4-4.7H24v9h12.4c-.5 2.9-2.2 5.3-4.7 6.9l7.3 5.7c4.3-3.9 6.9-9.8 6.9-16.9z"/><path fill="#FBBC05" d="M10.4 28.4c-.5-1.4-.8-2.9-.8-4.4s.3-3 .8-4.4l-7.8-6.1C.9 16.6 0 20.2 0 24s.9 7.4 2.6 10.5l7.8-6.1z"/><path fill="#34A853" d="M24 47.5c6.2 0 11.5-2 15.3-5.6l-7.3-5.7c-2 1.4-4.7 2.3-8 2.3-6.4 0-11.7-4.5-13.6-10.4l-7.8 6.1C6.5 42.1 14.6 47.5 24 47.5z"/></svg>
+          Google
+        </a>
+        <a href="#" aria-label="Continue with Facebook">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="#1877F2"/><path fill="#fff" d="M31 24h-5v14h-6V24h-4v-5h4v-3.4C20 11.4 22 9 27 9h4v5h-3c-1.4 0-2 .7-2 2v3h5l-.9 5z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </form>
+
+    <p class="auth-foot">Have an account? <a href="signin.html">Sign In!</a></p>
+  </section>
+</main>
+
+<style>.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+<script src="js/nav.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
