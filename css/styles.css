@@ -282,14 +282,27 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
   background:linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.06) 45%, rgba(0,0,0,.52) 100%);
 }
 .cta__mark{
-  position:absolute; left:-30px; top:117px;
-  width:1980px; max-width:none; z-index:1; opacity:.95; filter:brightness(0);
+  /* Was a hard 1980px/-30px/117px lifted off the 1920 frame, which meant that
+     between 1025px and 1919px the watermark stayed at full size and cropped to
+     unreadable black blobs. Now expressed proportionally so it scales with the
+     band: 103.125% of 1920 = 1980px and centring puts its left edge at -30px,
+     while translateY(19.4%) of the mark's own height = 117px — so the 1920
+     render is pixel-identical to the design, and every narrower width gets the
+     same watermark, just smaller. */
+  position:absolute; left:50%; top:0;
+  width:103.125%; max-width:none; z-index:1; opacity:.95; filter:brightness(0);
+  transform:translateX(-50%) translateY(19.4%);
   pointer-events:none;
 }
 .cta__panel{
-  position:absolute; z-index:2; left:437px; top:95px;
+  /* the Figma frame put this at left:437px, which is 54px right of centre in a
+     1920 band (437 vs 383). Centred at every width now — the ≤1440 rule below
+     already did this, so the two no longer disagree.
+     align-items:center stops the benefits column from stretching and leaving a
+     void under the Join button: both columns now sit centred in the panel. */
+  position:absolute; z-index:2; left:50%; top:95px; transform:translateX(-50%);
   width:1100px; height:415px; padding:45px 40px 33px 36px;
-  display:grid; grid-template-columns:628px 1fr; column-gap:32px;
+  display:grid; grid-template-columns:628px 1fr; column-gap:32px; align-items:center;
   border-radius:28px;
   background:linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.06) 55%, rgba(20,16,10,.16));
   border:1px solid rgba(255,255,255,.24);
@@ -308,7 +321,7 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
 .cta__body{ margin-top:9px; font-size:20px; line-height:25px; font-weight:300; color:#efefef; max-width:520px; }
 
 .cta__left,.cta__right{ min-width:0; }
-.cta__right{ padding-top:6px; }
+.cta__right{ padding-top:0; }   /* was a 6px nudge; align-items:center supersedes it */
 .cta__benefit-head{ font-size:16px; font-weight:600; }
 .cta__benefits{ margin-top:19px; display:flex; flex-direction:column; gap:19px; }
 .cta__benefits li{
@@ -323,7 +336,9 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
 .btn--join{ margin-top:36px; width:312px; max-width:100%; height:44px; font-size:16px; font-weight:500; border-radius:8px; }
 
 /* =========================================================== FOOTER ==== */
-.foot{ background:var(--foot-bg); color:#fff; padding-top:249px; }
+/* was 249px off the Figma frame — too much dead black between the CTA band and
+   the footer columns. Tightened; the footer wordmark still has room to breathe. */
+.foot{ background:var(--foot-bg); color:#fff; padding-top:176px; }
 .foot__shell{ width:1674px; margin-inline:auto; }
 .foot__grid{
   display:grid;
@@ -420,9 +435,7 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
   .foot__bar{ margin-top:56px; }
 }
 
-@media (max-width:1024px){
-  .cta__mark{ width:1400px; left:-140px; }
-}
+/* .cta__mark used to be stepped down here and at 820px; it now scales fluidly */
 @media (max-width:820px){
   .hiw,.feat{ padding-top:72px; padding-bottom:72px; }
   .sec-title{ font-size:28px; line-height:34px; }
@@ -433,7 +446,6 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
   .search__divider{ width:100%; height:1px; margin:0; align-self:auto; }
   .search__btn{ width:100%; height:52px; }
   .hero__mark{ display:none; }
-  .cta__mark{ width:900px; left:-90px; }
 }
 
 @media (max-width:640px){

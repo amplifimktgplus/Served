@@ -15,9 +15,7 @@
   const NAV = [
     { label: 'Home', href: 'index.html', key: 'home' },
     { label: 'Courts', href: 'courts.html', key: 'courts', chev: true },
-    { label: 'Pricing', href: 'courts.html', key: 'pricing', chev: true },
     { label: 'List Your Court', href: 'admin.html', key: 'list', chev: true },
-    { label: 'Contact Us', href: 'account.html', key: 'contact' },
   ]
 
   const active = document.body.dataset.nav || ''

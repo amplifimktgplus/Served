@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Dashboard — Served.</title>
-<meta name="description" content="Manage courts, bookings, revenue and users.">
+<title>Rally X — Owner Dashboard | Served.</title>
+<meta name="description" content="Court owner dashboard for Rally X: bookings, revenue and performance.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,154 +12,123 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/pages.css">
 <link rel="stylesheet" href="css/a11y.css">
-<style>
-  /* admin is an app shell: no marketing nav/footer, per the wireframe */
-  .bars{ display:flex; align-items:flex-end; gap:14px; height:220px; margin-top:22px; }
-  .bars div{ flex:1; background:linear-gradient(180deg,var(--orange),#ffa15c); border-radius:8px 8px 0 0; position:relative; min-width:0; }
-  .bars div span{ position:absolute; top:-24px; left:0; right:0; text-align:center; font-size:13px; font-weight:600; color:var(--navy); }
-  .bars div i{ position:absolute; bottom:-26px; left:0; right:0; text-align:center; font-size:13px; font-style:normal; color:var(--muted); }
-  .barwrap{ padding-bottom:34px; }
-</style>
 </head>
-<body data-page="admin">
+<body class="vpage" data-page="admin">
 
-<div class="admin">
-  <aside class="admin__side">
-    <a href="index.html" aria-label="Served. — back to site"><img class="brand" src="assets/img/logo-served.png" alt=""></a>
-    <nav aria-label="Admin sections">
-      <button data-view="courts" data-title="Manage Courts" class="is-on">
-        <svg class="ico" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M3.5 12h17M12 3.5v17"/></svg>Courts</button>
-      <button data-view="bookings" data-title="View Bookings">
-        <svg class="ico" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Bookings</button>
-      <button data-view="revenue" data-title="Revenue Reports">
-        <svg class="ico" viewBox="0 0 24 24"><path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/></svg>Revenue</button>
-      <button data-view="users" data-title="User Management">
-        <svg class="ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/></svg>Users</button>
-    </nav>
-  </aside>
+<!-- ======================================================== access gate ==
+     Owner-only screen. Players who land here never see the data. The check
+     is client-side (no backend in this build) — real enforcement is server
+     side; this proves the intended behaviour. -->
+<section class="gate" id="gate" hidden>
+  <div class="gate__card">
+    <img class="gate__logo" src="assets/img/logo-served.png" alt="Served.">
+    <h1>Court owner access only</h1>
+    <p>This dashboard belongs to the venue that owns the listing. Players don't see it —
+       they only ever see the public court page.</p>
+    <a class="btn btn--orange btn--md" href="signin.html">Sign in as a court owner</a>
+    <a class="btn btn--outline btn--md" href="index.html">Back to Served</a>
+    <p class="gate__note">Reviewing the prototype? <a href="#" id="demo-owner">Continue as a demo owner</a>.</p>
+  </div>
+</section>
 
-  <main class="admin__main">
-    <div class="admin__bar">
-      <h1 id="view-title">Manage Courts</h1>
-      <a class="btn btn--orange" href="courts.html" style="height:44px;padding-inline:22px;border-radius:10px;font-weight:600">View public site</a>
-    </div>
+<!-- ========================================================== dashboard == -->
+<div id="dash" hidden>
 
-    <div class="tiles">
-      <div class="tile"><span>Total bookings</span><b>152</b><i>▲ 12% vs last month</i></div>
-      <div class="tile"><span>Revenue</span><b>₱106,400</b><i>▲ 8% vs last month</i></div>
-      <div class="tile"><span>Active courts</span><b>30</b><i>across 6 venues</i></div>
-      <div class="tile"><span>Cancellations</span><b>7</b><i class="dn">▼ 3% vs last month</i></div>
-    </div>
-
-    <!-- COURTS -->
-    <div class="view is-on" id="v-courts">
-      <div class="tbl-wrap">
-        <h2>Venues &amp; courts</h2>
-        <div class="tbl-scroll">
-          <table class="tbl">
-            <thead><tr>
-              <th data-k>Venue</th><th data-k>City</th><th data-k>Surface</th>
-              <th data-k>Courts</th><th data-k>Rate</th><th data-k>Status</th>
-            </tr></thead>
-            <tbody>
-              <tr><td>Vantage Pickleball Marikina</td><td>Marikina</td><td>Hard</td><td data-v="4">4</td><td data-v="700">₱700</td><td><span class="tag tag--ok">Live</span></td></tr>
-              <tr><td>UP Diliman Tennis Court</td><td>Quezon City</td><td>Clay</td><td data-v="3">3</td><td data-v="700">₱700</td><td><span class="tag tag--ok">Live</span></td></tr>
-              <tr><td>Pico De Loro Badminton Court</td><td>Batangas</td><td>Wood</td><td data-v="4">4</td><td data-v="700">₱700</td><td><span class="tag tag--ok">Live</span></td></tr>
-              <tr><td>BGC Turf Pickleball Hub</td><td>Taguig</td><td>Acrylic</td><td data-v="6">6</td><td data-v="850">₱850</td><td><span class="tag tag--ok">Live</span></td></tr>
-              <tr><td>Alabang Tennis Club</td><td>Muntinlupa</td><td>Hard</td><td data-v="5">5</td><td data-v="950">₱950</td><td><span class="tag tag--warn">Pending review</span></td></tr>
-              <tr><td>Ortigas Smash Badminton</td><td>Pasig</td><td>Wood</td><td data-v="8">8</td><td data-v="600">₱600</td><td><span class="tag tag--ok">Live</span></td></tr>
-            </tbody>
-          </table>
-        </div>
+  <header class="dash__top">
+    <div class="dash__topin">
+      <a class="dash__brand" href="index.html" aria-label="Served. home">
+        <img src="assets/img/logo-served.png" alt="Served.">
+      </a>
+      <span class="dash__venue">
+        <img src="assets/img/rallyx-logo.png" alt="">
+        <span><b>Rally X</b><i>UP Diliman, QC · 3 courts</i></span>
+      </span>
+      <div class="dash__acts">
+        <a class="btn btn--brand btn--sm" href="court-rally-x.html?view=owner">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 5.5l4 4"/></svg>
+          Edit Court Page
+        </a>
+        <a class="btn btn--glass btn--sm" href="court-rally-x.html?view=player">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          View public site
+        </a>
+        <a class="dash__out" href="#" id="sign-out">Sign out</a>
       </div>
     </div>
+  </header>
 
-    <!-- BOOKINGS -->
-    <div class="view" id="v-bookings">
-      <div class="tbl-wrap">
-        <h2>Recent bookings</h2>
-        <div class="tbl-scroll">
-          <table class="tbl">
-            <thead><tr>
-              <th data-k>Reference</th><th data-k>Customer</th><th data-k>Venue</th>
-              <th data-k>Court</th><th data-k>Date</th><th data-k>Amount</th><th data-k>Status</th>
-            </tr></thead>
-            <tbody>
-              <tr><td>PB-20260815341</td><td>Juan Dela Cruz</td><td>Vantage Pickleball Marikina</td><td>Court A</td><td data-v="20260815">15 Aug 2026</td><td data-v="700">₱700</td><td><span class="tag tag--ok">Paid</span></td></tr>
-              <tr><td>PB-20260815127</td><td>Maria Santos</td><td>UP Diliman Tennis Court</td><td>Court C</td><td data-v="20260815">15 Aug 2026</td><td data-v="1400">₱1,400</td><td><span class="tag tag--ok">Paid</span></td></tr>
-              <tr><td>PB-20260817908</td><td>Paolo Reyes</td><td>Ortigas Smash Badminton</td><td>Court B</td><td data-v="20260817">17 Aug 2026</td><td data-v="1200">₱1,200</td><td><span class="tag tag--warn">Pending</span></td></tr>
-              <tr><td>PB-20260819552</td><td>Andrea Lim</td><td>BGC Turf Pickleball Hub</td><td>Court D</td><td data-v="20260819">19 Aug 2026</td><td data-v="850">₱850</td><td><span class="tag tag--ok">Paid</span></td></tr>
-              <tr><td>PB-20260820771</td><td>Carlo Mendoza</td><td>Alabang Tennis Club</td><td>Court A</td><td data-v="20260820">20 Aug 2026</td><td data-v="1900">₱1,900</td><td><span class="tag tag--ok">Paid</span></td></tr>
-              <tr><td>PB-20260822104</td><td>Bea Villanueva</td><td>Pico De Loro Badminton Court</td><td>Court B</td><td data-v="20260822">22 Aug 2026</td><td data-v="700">₱700</td><td><span class="tag tag--past">Cancelled</span></td></tr>
-            </tbody>
-          </table>
+  <main class="dash__main">
+    <div class="dash__shell">
+
+      <div class="dash__head">
+        <div>
+          <h1>Owner dashboard</h1>
+          <p>Bookings and revenue for Rally X. Figures cover August 2026.</p>
         </div>
       </div>
-    </div>
 
-    <!-- REVENUE -->
-    <div class="view" id="v-revenue">
-      <div class="tbl-wrap barwrap">
-        <h2>Revenue — last 6 months</h2>
-        <div style="padding:0 22px">
-          <div class="bars">
-            <div style="height:52%"><span>₱58k</span><i>Mar</i></div>
-            <div style="height:64%"><span>₱71k</span><i>Apr</i></div>
-            <div style="height:59%"><span>₱66k</span><i>May</i></div>
-            <div style="height:78%"><span>₱87k</span><i>Jun</i></div>
-            <div style="height:88%"><span>₱98k</span><i>Jul</i></div>
-            <div style="height:100%"><span>₱106k</span><i>Aug</i></div>
+      <div class="tiles" id="kpi"></div>
+
+      <!-- performance: day-on-day → year-on-year -->
+      <section class="tbl-wrap perf">
+        <div class="perf__bar">
+          <h2>Performance</h2>
+          <div class="perf__ctrl">
+            <div class="switch switch--light" id="metric" role="group" aria-label="Metric">
+              <button type="button" data-metric="bookings" aria-pressed="true">Bookings</button>
+              <button type="button" data-metric="revenue" aria-pressed="false">Revenue</button>
+            </div>
+            <div class="switch switch--light" id="range" role="group" aria-label="Compare by period">
+              <button type="button" data-range="day" aria-pressed="false">Day</button>
+              <button type="button" data-range="week" aria-pressed="false">Week</button>
+              <button type="button" data-range="month" aria-pressed="true">Month</button>
+              <button type="button" data-range="year" aria-pressed="false">Year</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="tbl-wrap" style="margin-top:22px">
-        <h2>Revenue by venue</h2>
+        <div class="perf__body">
+          <p class="perf__head" id="chart-head"></p>
+          <div class="chart" id="chart" role="img"></div>
+          <p class="perf__key">
+            Each bar is labelled with its change against the period before it —
+            day on day, week on week, month on month, year on year.
+          </p>
+        </div>
+      </section>
+
+      <!-- bookings + revenue in one downloadable ledger -->
+      <section class="tbl-wrap" style="margin-top:22px">
+        <div class="perf__bar">
+          <h2>Bookings &amp; revenue — August 2026</h2>
+          <button class="btn btn--navy btn--sm" type="button" id="csv">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/><path d="M12 15V4M7.5 10.5 12 15l4.5-4.5"/></svg>
+            Download CSV
+          </button>
+        </div>
         <div class="tbl-scroll">
           <table class="tbl">
-            <thead><tr><th data-k>Venue</th><th data-k>Bookings</th><th data-k>Revenue</th><th data-k>Avg / booking</th></tr></thead>
-            <tbody>
-              <tr><td>Ortigas Smash Badminton</td><td data-v="41">41</td><td data-v="27300">₱27,300</td><td data-v="666">₱666</td></tr>
-              <tr><td>Vantage Pickleball Marikina</td><td data-v="33">33</td><td data-v="23100">₱23,100</td><td data-v="700">₱700</td></tr>
-              <tr><td>BGC Turf Pickleball Hub</td><td data-v="27">27</td><td data-v="22950">₱22,950</td><td data-v="850">₱850</td></tr>
-              <tr><td>UP Diliman Tennis Court</td><td data-v="24">24</td><td data-v="16800">₱16,800</td><td data-v="700">₱700</td></tr>
-              <tr><td>Alabang Tennis Club</td><td data-v="15">15</td><td data-v="14250">₱14,250</td><td data-v="950">₱950</td></tr>
-              <tr><td>Pico De Loro Badminton Court</td><td data-v="12">12</td><td data-v="8400">₱8,400</td><td data-v="700">₱700</td></tr>
-            </tbody>
+            <thead><tr>
+              <th data-k>Reference</th><th data-k>Customer</th><th data-k>Court</th>
+              <th data-k>Date</th><th data-k>Hours</th><th data-k>Amount</th><th data-k>Status</th>
+            </tr></thead>
+            <tbody id="ledger"></tbody>
+            <tfoot id="ledger-foot"></tfoot>
           </table>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- USERS -->
-    <div class="view" id="v-users">
-      <div class="tbl-wrap">
-        <h2>Users</h2>
-        <div class="tbl-scroll">
-          <table class="tbl">
-            <thead><tr><th data-k>Name</th><th data-k>Email</th><th data-k>Role</th><th data-k>Bookings</th><th data-k>Joined</th><th data-k>Status</th></tr></thead>
-            <tbody>
-              <tr><td>Juan Dela Cruz</td><td>juan@email.com</td><td>Player</td><td data-v="14">14</td><td data-v="20260112">12 Jan 2026</td><td><span class="tag tag--ok">Active</span></td></tr>
-              <tr><td>Maria Santos</td><td>maria@email.com</td><td>Player</td><td data-v="9">9</td><td data-v="20260203">3 Feb 2026</td><td><span class="tag tag--ok">Active</span></td></tr>
-              <tr><td>Paolo Reyes</td><td>paolo@email.com</td><td>Court Owner</td><td data-v="0">0</td><td data-v="20260219">19 Feb 2026</td><td><span class="tag tag--ok">Active</span></td></tr>
-              <tr><td>Andrea Lim</td><td>andrea@email.com</td><td>Player</td><td data-v="21">21</td><td data-v="20260304">4 Mar 2026</td><td><span class="tag tag--ok">Active</span></td></tr>
-              <tr><td>Carlo Mendoza</td><td>carlo@email.com</td><td>Court Owner</td><td data-v="0">0</td><td data-v="20260415">15 Apr 2026</td><td><span class="tag tag--warn">Pending KYC</span></td></tr>
-              <tr><td>Bea Villanueva</td><td>bea@email.com</td><td>Player</td><td data-v="3">3</td><td data-v="20260508">8 May 2026</td><td><span class="tag tag--past">Dormant</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+      <p class="dash__note">
+        Prototype build — figures are fixture data for Rally X only, priced off the ₱700 base rate.
+        The access check is client-side; a live build must enforce it on the server.
+      </p>
 
-    <p style="margin-top:26px;font-size:14px;color:var(--muted)">
-      Demo build — all figures are fixture data. Revenue is scaled to the ₱700 base rate
-      rather than the wireframe's placeholder $3,800.
-    </p>
+    </div>
   </main>
 </div>
 
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
-<script src="js/nav.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

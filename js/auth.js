@@ -107,7 +107,12 @@
       const role = ($('input[name=role]:checked', form) || {}).value || 'player'
 
       if (done === 'signup' || done === 'signin') {
-        // no backend — hand off to the account (or admin, for a court owner)
+        // no backend — record the chosen role for the session so the owner
+        // dashboard can gate itself, then hand off to the right home screen
+        try {
+          sessionStorage.setItem('served.session',
+            JSON.stringify({ role, venue: role === 'owner' ? 'rally-x' : null }))
+        } catch (e) { /* private mode */ }
         location.href = role === 'owner' ? 'admin.html' : 'account.html'
         return
       }
