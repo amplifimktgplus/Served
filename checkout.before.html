@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Served.</title>
+<meta name="description" content="Secure checkout for your court booking.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/a11y.css">
+</head>
+<body data-page="checkout" data-nav="courts">
+
+<div id="site-nav"></div>
+
+<section class="phead">
+  <div class="shell phead__inner">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span>/</span><a href="courts.html">Courts</a><span>/</span>
+      <a href="booking-time.html">Time &amp; court</a><span>/</span><b>Payment</b>
+    </nav>
+    <h1>Secure <span class="accent">Checkout</span></h1>
+    <p>Your slot is held while you pay. Cards are processed over an encrypted connection.</p>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="shell">
+    <ol class="steps">
+      <li class="is-done"><b>1</b>Choose a date</li>
+      <li class="is-done"><b>2</b>Pick time &amp; court</li>
+      <li class="is-now"><b>3</b>Payment</li>
+      <li><b>4</b>Confirmation</li>
+    </ol>
+
+    <div class="pay">
+      <form class="panel" id="pay-form" novalidate>
+        <h2>Payment details</h2>
+        <p class="panel__sub">All fields are required.</p>
+
+        <div class="formgrid">
+          <div class="field field--full">
+            <label for="c-name">Name on card</label>
+            <input id="c-name" type="text" autocomplete="cc-name" placeholder="Juan Dela Cruz">
+            <span class="err"></span>
+          </div>
+          <div class="field field--full">
+            <label for="c-num">Card number</label>
+            <input id="c-num" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242">
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="c-exp">Expiry</label>
+            <input id="c-exp" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY">
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="c-cvv">CVV</label>
+            <input id="c-cvv" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123">
+            <span class="err"></span>
+          </div>
+          <div class="field field--full">
+            <label for="c-mail">Email for confirmation</label>
+            <input id="c-mail" type="email" autocomplete="email" placeholder="you@email.com">
+            <span class="err"></span>
+          </div>
+        </div>
+
+        <button class="btn btn--orange" type="submit"
+                style="width:100%;height:54px;border-radius:12px;font-size:17px;font-weight:600;margin-top:24px">
+          Pay Now
+        </button>
+
+        <p class="note">
+          <svg class="ico" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg>
+          <span><b>Demo build — no payment is taken.</b> A live site needs a Stripe (or equivalent) integration here; card details must never touch your own server.</span>
+        </p>
+      </form>
+
+      <aside class="panel summary">
+        <h2>Order summary</h2>
+        <div class="row"><span>Venue</span><b id="s-venue">—</b></div>
+        <div class="row"><span>Court</span><b id="s-court">—</b></div>
+        <div class="row"><span>When</span><b id="s-when">—</b></div>
+        <div class="row"><span>Duration</span><b id="s-dur">—</b></div>
+        <div class="row"><span>Rate</span><b id="s-rate">—</b></div>
+        <div class="total"><span>Total</span><b id="s-total">₱0</b></div>
+        <a class="btn btn--outline" href="booking-time.html"
+           style="width:100%;height:46px;border-radius:12px;margin-top:20px">Change selection</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div id="site-foot"></div>
+
+<script src="js/data.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

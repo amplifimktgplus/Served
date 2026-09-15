@@ -1,0 +1,59 @@
+{
+  "overall": 0.8977860915492958,
+  "bands": [
+    {
+      "name": "nav",
+      "y0": 0,
+      "y1": 78,
+      "shift": 0,
+      "match": 0.9650173611111111
+    },
+    {
+      "name": "hero",
+      "y0": 78,
+      "y1": 842,
+      "shift": 0,
+      "match": 0.8821219186300174
+    },
+    {
+      "name": "how-it-works",
+      "y0": 843,
+      "y1": 1497,
+      "shift": 557,
+      "match": 0.9813814029051988
+    },
+    {
+      "name": "featured",
+      "y0": 1498,
+      "y1": 2470,
+      "shift": 557,
+      "match": 0.9624126586076818
+    },
+    {
+      "name": "cta",
+      "y0": 2471,
+      "y1": 2995,
+      "shift": 557,
+      "match": 0.6624522900763359
+    },
+    {
+      "name": "footer",
+      "y0": 2996,
+      "y1": 3554,
+      "shift": 557,
+      "match": 0.9202770310633214
+    }
+  ],
+  "metrics": {
+    "scrollWidth": 1920,
+    "scrollHeight": 4111,
+    "hOverflow": false,
+    "authoredCount": 1,
+    "authoredH": 557
+  },
+  "consoleErrors": [],
+  "refH": 3554,
+  "buildH": 4111,
+  "authoredH": 557,
+  "heightAccounted": true
+}

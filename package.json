@@ -1,6 +1,1 @@
-{
-  "name": "served-homepage",
-  "private": true,
-  "type": "module",
-  "scripts": { "verify": "node verify.mjs" }
-}
+{"name":"served-figma-export","private":true,"type":"module","dependencies":{"dom-to-svg":"^0.12.2"}}
