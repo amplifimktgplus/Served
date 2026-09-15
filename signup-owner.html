@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Create your account — Served.</title>
-<meta name="description" content="Create your Served. account. Book your court. Start playing.">
+<title>List your court — Served.</title>
+<meta name="description" content="Create your Served. court owner account. List your court. Start earning.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,10 @@
       Back to site
     </a>
     <div class="auth__glass">
-      <button class="btn btn--orange" type="button" data-focus="f-user">Register Now</button>
-      <p>Find your court. Book it. Show up. That’s it. Served cuts out the calls, the waiting, the guesswork. Just you, the game, and a slot that’s already yours. Register now.</p>
+      <button class="btn btn--orange" type="button" data-focus="f-user">List your court now</button>
+      <p>Ready to fill more open slots effortlessly?</p>
+      <p>Listing your courts on Served is 100% free!<br>Say goodbye to manual scheduling and manage all your bookings with ease through our fully automated system.</p>
+      <p>You keep your earnings, and we only charge a tiny 5% processing fee handled automatically by the player when they book.</p>
     </div>
   </aside>
 
@@ -34,13 +36,13 @@
 
     <form class="auth-card" data-auth="signup" novalidate>
       <h1>Get Served.</h1>
-      <p class="sub">Create your account. Book your court. Start playing.</p>
+      <p class="sub">Create your account. List your court. Start playing.</p>
 
       <div class="roles" role="radiogroup" aria-label="Account type" aria-describedby="role-note">
-        <label><input type="radio" name="role" value="player" checked><span class="dot"></span><span class="lbl">I am a Player</span></label>
-        <label><input type="radio" name="role" value="owner" data-goto="signup-owner.html"><span class="dot"></span><span class="lbl">I am a Court Owner</span></label>
+        <label><input type="radio" name="role" value="player" data-goto="signup.html"><span class="dot"></span><span class="lbl">I am a Player</span></label>
+        <label><input type="radio" name="role" value="owner" checked><span class="dot"></span><span class="lbl">I am a Court Owner</span></label>
       </div>
-      <span class="sr-only" id="role-note">Choosing Court Owner opens the court owner sign-up page.
+      <span class="sr-only" id="role-note">Choosing Player opens the player sign-up page.
         Arrow keys move between the options without leaving this page.</span>
 
       <div>

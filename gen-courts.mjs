@@ -18,6 +18,21 @@ vm.runInContext(fs.readFileSync(path.join(HERE, 'js/data.js'), 'utf8'), sandbox)
 const { venues } = sandbox.window.SERVED
 const peso = (n) => '₱' + n.toLocaleString('en-US')
 
+/* Icon tiles stand in for facility photography until real images land.
+   Keyed by the `kind` on each facility in js/data.js. */
+const FAC_ICO = {
+  shop: '<path d="M4 9h24l-2 5.5a4 4 0 0 1-3.8 2.8H9.8A4 4 0 0 1 6 14.5z"/><path d="M11 9V6.5a5 5 0 0 1 10 0V9"/><path d="M8 17.3V25a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.7"/>',
+  cafe: '<path d="M6 7h16v10a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z"/><path d="M22 10h2.5a3.5 3.5 0 0 1 0 7H22"/><path d="M8 27h16"/>',
+  lounge: '<path d="M6 16v-3a3 3 0 0 1 6 0v3h8v-3a3 3 0 0 1 6 0v3"/><path d="M4 16h24v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 24v3M24 24v3"/>',
+  locker: '<rect x="7" y="4" width="18" height="24" rx="2.5"/><path d="M16 4v24"/><path d="M12 13h1.5M18.5 13H20"/>',
+  rental: '<ellipse cx="13" cy="11" rx="7.5" ry="8.5"/><path d="M13 19.5 17 28"/><path d="M8 11h10M13 3.5v15"/>',
+  gym: '<path d="M5 12v8M27 12v8M9 9v14M23 9v14"/><path d="M9 16h14"/>',
+}
+const facTile = (f, alt) =>
+  f.img
+    ? `<img src="${f.img}" alt="${alt}">`
+    : `<span class="fac__ph" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${FAC_ICO[f.kind] || FAC_ICO.lounge}</svg></span>`
+
 const page = (v) => {
   const others = venues.filter((o) => o.slug !== v.slug).slice(0, 3)
   return `<!doctype html>
@@ -46,7 +61,9 @@ const page = (v) => {
 </head>
 <body data-page="court" data-nav="courts">
 
-<div id="site-nav"></div>
+<!-- No #site-nav slot: the site header is deliberately absent on individual
+     court pages. chrome.js only injects where it finds the slot, so omitting it
+     is the whole mechanism. The breadcrumb below carries navigation instead. -->
 
 <section class="phead">
   <div class="shell phead__inner">
@@ -80,17 +97,32 @@ const page = (v) => {
 
       <h3 style="margin-top:30px;font-size:20px;font-weight:700;color:var(--navy)">Amenities</h3>
       <ul class="amen">${v.amenities.map((a) => `<li>${a}</li>`).join('')}</ul>
+
+      <h2 class="fac__title">More about ${v.name}</h2>
+      <p class="fac__sub">Shops, food and places to sit between games.</p>
+      <ul class="fac">
+        ${(v.facilities || []).map((f) => `<li class="fac__card">
+          <span class="fac__media">${facTile(f, `${f.title} at ${v.name}`)}</span>
+          <h3>${f.title}</h3>
+          <p>${f.desc}</p>
+        </li>`).join('\n        ')}
+      </ul>
     </div>
 
     <aside class="booking-card">
       <span class="price">${peso(v.price)}<small> / hr</small></span>
+      <small class="price-note">*exclusive of tax and fees</small>
       <div class="kv"><span>Rating</span><b>${v.rating.toFixed(1)} · ${v.reviews} reviews</b></div>
       <div class="kv"><span>Next availability</span><b>${v.next}</b></div>
       <div class="kv"><span>Location</span><b>${v.location}</b></div>
       <hr>
       <div class="kv"><span>Courts bookable</span><b>${v.courts}</b></div>
       <a class="btn btn--orange" href="booking-calendar.html?venue=${v.slug}">Check Availability</a>
-      <p style="margin-top:14px;font-size:14px;color:var(--muted);text-align:center">Free cancellation up to 24 hours before your slot.</p>
+      <!-- Manual / walk-in entry is an owner job and there is no dedicated screen
+           for it, so this resolves to the admin dashboard — the nearest real page,
+           following the same orphan-link rule as the nav. -->
+      <a class="btn btn--outline" href="admin.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.5v5M9.5 16h5"/></svg>Add a reservation</a>
+      <p style="margin-top:14px;font-size:14px;color:var(--muted);text-align:center">Free cancellation up to 24 hours before your slot.<br>Court owners can add manual or walk-in bookings.</p>
     </aside>
   </div>
 </section>
@@ -109,6 +141,7 @@ const page = (v) => {
         <div class="lrow__side">
           <span class="rate"><b>${o.rating.toFixed(1)}</b>${o.reviews} Reviews</span>
           <span class="price">${peso(o.price)}<small> / hr</small></span>
+          <small class="price-note">*exclusive of tax and fees</small>
           <a class="btn btn--orange" style="height:44px;padding-inline:22px;border-radius:10px;font-weight:600" href="court-${o.slug}.html">View Court</a>
         </div>
       </article>`).join('\n      ')}

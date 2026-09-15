@@ -24,7 +24,9 @@
 </head>
 <body data-page="court" data-nav="courts">
 
-<div id="site-nav"></div>
+<!-- No #site-nav slot: the site header is deliberately absent on individual
+     court pages. chrome.js only injects where it finds the slot, so omitting it
+     is the whole mechanism. The breadcrumb below carries navigation instead. -->
 
 <section class="phead">
   <div class="shell phead__inner">
@@ -59,17 +61,47 @@
 
       <h3 style="margin-top:30px;font-size:20px;font-weight:700;color:var(--navy)">Amenities</h3>
       <ul class="amen"><li>Lights</li><li>Net</li><li>Showers</li><li>Parking</li></ul>
+
+      <h2 class="fac__title">More about Alabang Tennis Club</h2>
+      <p class="fac__sub">Shops, food and places to sit between games.</p>
+      <ul class="fac">
+        <li class="fac__card">
+          <span class="fac__media"><span class="fac__ph" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h24l-2 5.5a4 4 0 0 1-3.8 2.8H9.8A4 4 0 0 1 6 14.5z"/><path d="M11 9V6.5a5 5 0 0 1 10 0V9"/><path d="M8 17.3V25a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.7"/></svg></span></span>
+          <h3>Pro Shop</h3>
+          <p>Rackets, grips, shuttles and apparel available on site.</p>
+        </li>
+        <li class="fac__card">
+          <span class="fac__media"><span class="fac__ph" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h16v10a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z"/><path d="M22 10h2.5a3.5 3.5 0 0 1 0 7H22"/><path d="M8 27h16"/></svg></span></span>
+          <h3>Café</h3>
+          <p>Hot and cold drinks and light meals between sets.</p>
+        </li>
+        <li class="fac__card">
+          <span class="fac__media"><span class="fac__ph" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-3a3 3 0 0 1 6 0v3h8v-3a3 3 0 0 1 6 0v3"/><path d="M4 16h24v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 24v3M24 24v3"/></svg></span></span>
+          <h3>Players’ Lounge</h3>
+          <p>Air-conditioned seating for players and their guests.</p>
+        </li>
+        <li class="fac__card">
+          <span class="fac__media"><span class="fac__ph" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="4" width="18" height="24" rx="2.5"/><path d="M16 4v24"/><path d="M12 13h1.5M18.5 13H20"/></svg></span></span>
+          <h3>Locker Rooms</h3>
+          <p>Day lockers, changing rooms and showers.</p>
+        </li>
+      </ul>
     </div>
 
     <aside class="booking-card">
       <span class="price">₱950<small> / hr</small></span>
+      <small class="price-note">*exclusive of tax and fees</small>
       <div class="kv"><span>Rating</span><b>4.8 · 96 reviews</b></div>
       <div class="kv"><span>Next availability</span><b>28 August 2026</b></div>
       <div class="kv"><span>Location</span><b>Alabang, Muntinlupa</b></div>
       <hr>
       <div class="kv"><span>Courts bookable</span><b>5</b></div>
       <a class="btn btn--orange" href="booking-calendar.html?venue=alabang-tennis-club">Check Availability</a>
-      <p style="margin-top:14px;font-size:14px;color:var(--muted);text-align:center">Free cancellation up to 24 hours before your slot.</p>
+      <!-- Manual / walk-in entry is an owner job and there is no dedicated screen
+           for it, so this resolves to the admin dashboard — the nearest real page,
+           following the same orphan-link rule as the nav. -->
+      <a class="btn btn--outline" href="admin.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.5v5M9.5 16h5"/></svg>Add a reservation</a>
+      <p style="margin-top:14px;font-size:14px;color:var(--muted);text-align:center">Free cancellation up to 24 hours before your slot.<br>Court owners can add manual or walk-in bookings.</p>
     </aside>
   </div>
 </section>
@@ -88,20 +120,22 @@
         <div class="lrow__side">
           <span class="rate"><b>4.2</b>300 Reviews</span>
           <span class="price">₱700<small> / hr</small></span>
+          <small class="price-note">*exclusive of tax and fees</small>
           <a class="btn btn--orange" style="height:44px;padding-inline:22px;border-radius:10px;font-weight:600" href="court-vantage-pickleball-marikina.html">View Court</a>
         </div>
       </article>
       <article class="lrow">
-        <a class="lrow__media" href="court-rally-x.html" aria-label="View Rally X"><img src="assets/img/venue-tennis.jpg" alt="Rally X"></a>
+        <a class="lrow__media" href="court-up-diliman-tennis.html" aria-label="View UP Diliman Tennis Court"><img src="assets/img/venue-tennis.jpg" alt="UP Diliman Tennis Court"></a>
         <div>
-          <h3><a href="court-rally-x.html">Rally X</a></h3>
-          <div class="lrow__meta"><span>UP Diliman, QC</span><span>Clay · 3 courts</span></div>
+          <h3><a href="court-up-diliman-tennis.html">UP Diliman Tennis Court</a></h3>
+          <div class="lrow__meta"><span>UP Diliman , QC</span><span>Clay · 3 courts</span></div>
           <p class="lrow__body">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
         </div>
         <div class="lrow__side">
           <span class="rate"><b>5.0</b>150 Reviews</span>
           <span class="price">₱700<small> / hr</small></span>
-          <a class="btn btn--orange" style="height:44px;padding-inline:22px;border-radius:10px;font-weight:600" href="court-rally-x.html">View Court</a>
+          <small class="price-note">*exclusive of tax and fees</small>
+          <a class="btn btn--orange" style="height:44px;padding-inline:22px;border-radius:10px;font-weight:600" href="court-up-diliman-tennis.html">View Court</a>
         </div>
       </article>
       <article class="lrow">
@@ -114,6 +148,7 @@
         <div class="lrow__side">
           <span class="rate"><b>4.7</b>120 Reviews</span>
           <span class="price">₱700<small> / hr</small></span>
+          <small class="price-note">*exclusive of tax and fees</small>
           <a class="btn btn--orange" style="height:44px;padding-inline:22px;border-radius:10px;font-weight:600" href="court-pico-de-loro-badminton.html">View Court</a>
         </div>
       </article>

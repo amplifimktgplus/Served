@@ -16,14 +16,16 @@
 <!-- ============================== NAV ============================== -->
 <header class="nav">
   <div class="nav__inner">
-    <a class="nav__logo" href="index.html" aria-label="Served. home">
+    <a class="nav__logo" href="#" aria-label="Served. home">
       <img src="assets/img/logo-served.png" alt="Served.">
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      <a href="index.html" class="is-active">Home</a>
-      <a href="courts.html">Courts<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="admin.html">List Your Court<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#" class="is-active">Home</a>
+      <a href="#">Courts<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Pricing<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="signup-owner.html">List Your Court<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Contact Us</a>
     </nav>
 
     <div class="nav__actions">
@@ -31,7 +33,7 @@
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Login / Register
       </a>
-      <a href="admin.html" class="btn btn--ghost btn--nav">
+      <a href="signup-owner.html" class="btn btn--ghost btn--nav">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
         List Your Court
       </a>
@@ -71,6 +73,44 @@
 </section>
 
 <!-- ========================= HOW IT WORKS ========================= -->
+<!-- ======================= LIST YOUR COURT TODAY =======================
+     Authored section — NOT in the Figma source. Added after the pixel
+     baseline was taken, which is why verify.mjs offsets the bands below it. -->
+<section class="hiw own">
+  <div class="shell">
+    <h2 class="sec-title">List Your <span class="accent">Court</span> Today</h2>
+    <p class="sec-sub">Book a court, run your game, no calls, no waiting, no hassle.</p>
+
+    <div class="hiw__grid">
+      <article class="hiw-card">
+        <span class="hiw-card__tile">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 26.5V39a4.5 4.5 0 0 1-4.5 4.5h-23A4.5 4.5 0 0 1 8 39V16a4.5 4.5 0 0 1 4.5-4.5H25"/><path d="M34.8 7.7a3.8 3.8 0 0 1 5.5 5.3L27.2 26.6l-7 1.7 1.7-7z"/></svg>
+        </span>
+        <h3>List your court</h3>
+        <p>Create your account in seconds. Fill out all<br>necessary details about you.</p>
+        <a href="signup-owner.html" class="btn btn--outline btn--wide1">List your court now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+
+      <article class="hiw-card">
+        <span class="hiw-card__tile hiw-card__tile--orange"><img src="assets/img/icon-court.svg" alt="" aria-hidden="true"></span>
+        <h3>Add your court details</h3>
+        <p>Fill out details about your court, amenities,<br>rules, rates and photos.</p>
+        <a href="signup-owner.html" class="btn btn--dark">List your court now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+
+      <article class="hiw-card">
+        <span class="hiw-card__tile">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="14.5" height="14.5" rx="3.4"/><rect x="26.5" y="7" width="14.5" height="14.5" rx="3.4"/><rect x="7" y="26.5" width="14.5" height="14.5" rx="3.4"/><g fill="currentColor" stroke="none"><rect x="26.5" y="26.5" width="6" height="6" rx="1.4"/><rect x="35" y="26.5" width="6" height="6" rx="1.4"/><rect x="26.5" y="35" width="6" height="6" rx="1.4"/><rect x="35" y="35" width="6" height="6" rx="1.4"/></g></svg>
+        </span>
+        <h3>Manage your court<br>bookings with ease</h3>
+        <p>Monitor all bookings you receive, forecast upcoming<br>bookings or even generate reports with ease,<br>ALL FOR FREE.</p>
+        <a href="signup-owner.html" class="btn btn--outline">List your court now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== HOW IT WORKS =========================== -->
 <section class="hiw">
   <div class="shell">
     <h2 class="sec-title">How <span class="accent">Served.</span> Works</h2>
@@ -81,21 +121,21 @@
         <span class="hiw-card__tile"><img src="assets/img/icon-signup.png" alt="" aria-hidden="true"></span>
         <h3>The Sign Up</h3>
         <p>Create your account in seconds. Register as a<br>Player to start booking, or as a Court Owner to get<br>your facility listed.</p>
-        <a href="signup.html" class="btn btn--outline btn--wide1">Register Now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="btn btn--outline btn--wide1">Register Now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
 
       <article class="hiw-card">
-        <span class="hiw-card__tile hiw-card__tile--orange"><img src="assets/img/icon-court.png" alt="" aria-hidden="true"></span>
+        <span class="hiw-card__tile hiw-card__tile--orange"><img src="assets/img/icon-court.svg" alt="" aria-hidden="true"></span>
         <h3>Find Your Court</h3>
         <p>Search by sport, location, or availability. Every<br>court on Served is real, verified,<br>and ready to book.</p>
-        <a href="courts.html" class="btn btn--dark">See All Courts<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="btn btn--dark">See All Courts<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
 
       <article class="hiw-card">
         <span class="hiw-card__tile"><img src="assets/img/icon-book.png" alt="" aria-hidden="true"></span>
         <h3>Book &amp; Play</h3>
         <p>Pick your slot, lock it in, show up.<br>That’s it, your court is served.</p>
-        <a href="courts.html" class="btn btn--outline">Book Now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="btn btn--outline">Book Now<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
     </div>
   </div>
@@ -119,6 +159,7 @@
             <img src="assets/img/venue-pickleball.jpg" alt="Vantage Pickleball Marikina">
             <span class="chip chip--blue">Featured</span>
             <span class="chip chip--price">₱700 <span>/ hr</span></span>
+            <small class="chip-note">*exclusive of tax and fees</small>
           </div>
           <div class="venue__body">
             <div class="venue__rate">
@@ -131,16 +172,17 @@
             <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>1 FVR Rd, Marikina</p>
             <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Next availablity : <span class="accent">30 August 2026</span></p>
             <hr class="venue__rule">
-            <a href="courts.html" class="btn btn--orange btn--book"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Book Now</a>
+            <a href="#" class="btn btn--orange btn--book"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Book Now</a>
           </div>
         </article>
 
         <!-- card 2 -->
         <article class="venue">
           <div class="venue__media">
-            <img src="assets/img/venue-tennis.jpg" alt="Rally X">
+            <img src="assets/img/venue-tennis.jpg" alt="UP Diliman Tennis Court">
             <span class="chip chip--blue">Top Rated</span>
             <span class="chip chip--price">₱700 <span>/ hr</span></span>
+            <small class="chip-note">*exclusive of tax and fees</small>
           </div>
           <div class="venue__body">
             <div class="venue__rate">
@@ -148,12 +190,12 @@
               <span class="reviews">150 Reviews</span>
               <button class="heart" aria-label="Save venue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.6-7-9.3A4.2 4.2 0 0 1 12 8a4.2 4.2 0 0 1 7 2.7C19 15.4 12 20 12 20z"/></svg></button>
             </div>
-            <h3>Rally X</h3>
+            <h3>UP Diliman Tennis Court</h3>
             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-            <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>UP Diliman, QC</p>
+            <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>UP Diliman , QC</p>
             <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Next availablity : <span class="accent">24 August 2026</span></p>
             <hr class="venue__rule">
-            <a href="courts.html" class="btn btn--orange btn--book"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Book Now</a>
+            <a href="#" class="btn btn--orange btn--book"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Book Now</a>
           </div>
         </article>
 
@@ -162,6 +204,7 @@
           <div class="venue__media">
             <img src="assets/img/venue-badminton.jpg" alt="Pico De Loro Badminton Court">
             <span class="chip chip--price">₱700 <span>/ hr</span></span>
+            <small class="chip-note">*exclusive of tax and fees</small>
           </div>
           <div class="venue__body">
             <div class="venue__rate">
@@ -174,7 +217,7 @@
             <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>Nasugbu, Batangas</p>
             <p class="venue__meta"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Next availablity : <span class="accent">26 August 2026</span></p>
             <hr class="venue__rule">
-            <a href="courts.html" class="btn btn--orange btn--book"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Book Now</a>
+            <a href="#" class="btn btn--orange btn--book"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Book Now</a>
           </div>
         </article>
       </div>
@@ -184,7 +227,7 @@
       </button>
     </div>
 
-    <a href="courts.html" class="btn btn--navy btn--viewall">View All Featured
+    <a href="#" class="btn btn--navy btn--viewall">View All Featured
       <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12h7M13 9.5l2.5 2.5L13 14.5"/></svg>
     </a>
   </div>
@@ -212,7 +255,7 @@
         <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12.5 4 4 8-8.5"/></svg></span>Build of Trust</li>
         <li><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12.5 4 4 8-8.5"/></svg></span>Save Funds from creating a standalone booking app and marketing expenses</li>
       </ul>
-      <a href="admin.html" class="btn btn--orange btn--join">
+      <a href="#" class="btn btn--orange btn--join">
         <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Join  Us Today!
       </a>
@@ -233,13 +276,13 @@
         <h3>INFO</h3>
         <div class="foot__links">
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="courts.html">Court Gallery</a></li>
-            <li><a href="courts.html">Events</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Court Gallery</a></li>
+            <li><a href="#">Events</a></li>
           </ul>
           <ul>
-            <li><a href="courts.html">Tournaments</a></li>
-            <li><a href="courts.html">Club Ranking</a></li>
+            <li><a href="#">Tournaments</a></li>
+            <li><a href="#">Club Ranking</a></li>
             <li><a href="signup.html">Registration</a></li>
           </ul>
         </div>

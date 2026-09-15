@@ -34,11 +34,24 @@ const BANDS = [
   ['footer', 2996, 3554],
 ]
 
+/* Authored sections (`.own`) are NOT in the Figma reference. They are inserted
+   at this y in reference coordinates, so every band at or below it is compared
+   against the build shifted down by the inserted height. Bands above it compare
+   directly. That keeps all six cloned bands honestly diffed against the design
+   while the authored content is reported separately, never scored against it. */
+const INSERT_AT = 843
+
 const browser = await chromium.launch()
 const page = await browser.newPage({
   viewport: { width: WIDTH, height: 1080 },
   deviceScaleFactor: 1,
 })
+// registered before navigation — attaching it after the screenshot (as this
+// previously did) meant load-time errors were never seen
+const consoleErrors = []
+page.on('console', (m) => m.type() === 'error' && consoleErrors.push(m.text()))
+page.on('pageerror', (e) => consoleErrors.push('pageerror: ' + e.message))
+
 await page.goto(PAGE, { waitUntil: 'networkidle' })
 // settle webfonts + any lazy paint
 await page.evaluate(() => document.fonts && document.fonts.ready)
@@ -47,15 +60,15 @@ await page.waitForTimeout(600)
 const shotPath = path.join(OUT, 'build-1x.png')
 await page.screenshot({ path: shotPath, fullPage: true })
 
-const consoleErrors = []
-page.on('console', (m) => m.type() === 'error' && consoleErrors.push(m.text()))
-
 const metrics = await page.evaluate(() => {
   const de = document.documentElement
+  const own = [...document.querySelectorAll('.own')]
   return {
     scrollWidth: de.scrollWidth,
     scrollHeight: de.scrollHeight,
     hOverflow: de.scrollWidth > de.clientWidth,
+    authoredCount: own.length,
+    authoredH: Math.round(own.reduce((n, el) => n + el.getBoundingClientRect().height, 0)),
   }
 })
 await browser.close()
@@ -65,17 +78,29 @@ const build = PNG.sync.read(fs.readFileSync(shotPath))
 console.log(`reference ${ref.width}x${ref.height}`)
 console.log(`build     ${build.width}x${build.height}`)
 console.log(`page metrics: scrollHeight=${metrics.scrollHeight} hOverflow=${metrics.hOverflow}`)
-console.log(`height delta: ${build.height - ref.height}px`)
 
-// Compare over the overlapping region so a height mismatch still yields a signal.
 const W = Math.min(ref.width, build.width)
-const H = Math.min(ref.height, build.height)
-const crop = (src, w, h) => {
-  const out = new PNG({ width: w, height: h })
+const OFFSET = build.height - ref.height
+
+// The cloned content must still be exactly the reference height: anything the
+// build gained has to be accounted for by the authored sections, to the pixel.
+const accounted = OFFSET === metrics.authoredH
+console.log(
+  `authored insert: +${OFFSET}px across ${metrics.authoredCount} .own section(s)` +
+  ` — measured ${metrics.authoredH}px ${accounted ? '(accounted for)' : '*** UNACCOUNTED ***'}`
+)
+if (!accounted) {
+  console.log(`  cloned content drifted by ${OFFSET - metrics.authoredH}px — this is a real regression`)
+}
+
+// Lift one band out of a page at an arbitrary y, into a W-wide buffer.
+const bandOf = (src, y0, y1) => {
+  const h = y1 - y0
+  const out = new PNG({ width: W, height: h })
   for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) {
-      const s = (src.width * y + x) << 2
-      const d = (w * y + x) << 2
+    for (let x = 0; x < W; x++) {
+      const s = (src.width * (y0 + y) + x) << 2
+      const d = (W * y + x) << 2
       out.data[d] = src.data[s]
       out.data[d + 1] = src.data[s + 1]
       out.data[d + 2] = src.data[s + 2]
@@ -84,34 +109,52 @@ const crop = (src, w, h) => {
   }
   return out
 }
-const a = crop(ref, W, H)
-const b = crop(build, W, H)
-const diff = new PNG({ width: W, height: H })
-const bad = pixelmatch(a.data, b.data, diff.data, W, H, { threshold: 0.12, includeAA: false })
-fs.writeFileSync(path.join(OUT, 'diff.png'), PNG.sync.write(diff))
-const overall = 1 - bad / (W * H)
-console.log(`\nOVERALL MATCH ${(overall * 100).toFixed(3)}%  (${bad} px differ of ${W * H})`)
 
-console.log('\nper-band:')
+console.log('\nper-band (vs the Figma render; bands below the insert are offset):')
 const rows = []
+const diff = new PNG({ width: W, height: ref.height })
+let totalBad = 0
+let totalPx = 0
 for (const [name, y0, y1] of BANDS) {
-  const yy1 = Math.min(y1, H)
-  if (y0 >= yy1) continue
-  const h = yy1 - y0
-  const sa = new PNG({ width: W, height: h })
-  const sb = new PNG({ width: W, height: h })
-  a.data.copy(sa.data, 0, y0 * W * 4, yy1 * W * 4)
-  b.data.copy(sb.data, 0, y0 * W * 4, yy1 * W * 4)
+  const shift = y0 >= INSERT_AT ? OFFSET : 0
+  if (y1 > ref.height || y1 + shift > build.height) {
+    console.log(`  ${name.padEnd(14)} SKIPPED — band falls outside one of the images`)
+    continue
+  }
+  const h = y1 - y0
+  const sa = bandOf(ref, y0, y1)
+  const sb = bandOf(build, y0 + shift, y1 + shift)
   const d2 = new PNG({ width: W, height: h })
   const n = pixelmatch(sa.data, sb.data, d2.data, W, h, { threshold: 0.12, includeAA: false })
+  d2.data.copy(diff.data, y0 * W * 4)
   const m = 1 - n / (W * h)
-  rows.push({ name, y0, y1: yy1, match: m })
+  totalBad += n
+  totalPx += W * h
+  rows.push({ name, y0, y1, shift, match: m })
   const bar = '█'.repeat(Math.round(m * 40)).padEnd(40, '·')
-  console.log(`  ${name.padEnd(14)} y${String(y0).padStart(5)}-${String(yy1).padStart(5)}  ${bar} ${(m * 100).toFixed(2)}%`)
+  console.log(
+    `  ${name.padEnd(14)} y${String(y0).padStart(5)}-${String(y1).padStart(5)}` +
+    `${shift ? ` +${String(shift).padStart(4)}` : '      '}  ${bar} ${(m * 100).toFixed(2)}%`
+  )
 }
+fs.writeFileSync(path.join(OUT, 'diff.png'), PNG.sync.write(diff))
+
+// Overall is the aggregate of the cloned bands only — the authored section has
+// nothing in the reference to be scored against, so including it would be noise.
+const overall = totalPx ? 1 - totalBad / totalPx : 0
+console.log(`\nOVERALL MATCH ${(overall * 100).toFixed(3)}%  (${totalBad} px differ of ${totalPx} cloned)`)
+console.log(`  authored section excluded from the score (${W * OFFSET} px, nothing to compare against)`)
+
 fs.writeFileSync(
   path.join(OUT, 'report.json'),
-  JSON.stringify({ overall, bands: rows, metrics, consoleErrors, refH: ref.height, buildH: build.height }, null, 2)
+  JSON.stringify(
+    {
+      overall, bands: rows, metrics, consoleErrors,
+      refH: ref.height, buildH: build.height,
+      authoredH: metrics.authoredH, heightAccounted: accounted,
+    },
+    null, 2
+  )
 )
 console.log(`\nartifacts -> ${OUT}`)
 if (consoleErrors.length) console.log('console errors:', consoleErrors)

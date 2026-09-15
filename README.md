@@ -20,21 +20,36 @@ Run `node verify.mjs` to reproduce the match figures below.
 ## Fidelity
 
 Headless Chromium at 1920px wide, diffed against the 1:1 PDF render
-(`pixelmatch`, threshold 0.12, anti-aliasing ignored). Page height is exact: **3554px**.
+(`pixelmatch`, threshold 0.12, anti-aliasing ignored).
 
-| Band | y-range | Match |
+The homepage now carries **authored sections that are not in the Figma source**, so it
+is taller than the 3554px reference and "height delta: 0px" no longer applies. In its
+place `verify.mjs` compares bands above the insertion point directly, bands below it
+against the build shifted down by the inserted height, and asserts that the whole
+shift is accounted for by the authored sections — **+557px inserted, 557px measured**.
+Only cloned bands are scored; authored content has nothing in the reference to be
+measured against, so including it would be noise rather than signal.
+
+| Band | y-range (reference) | Match |
 |---|---|---|
-| Nav | 0–78 | **96.5%** |
-| Hero | 78–842 | **88.2%** |
-| How It Works | 843–1497 | **97.7%** |
-| Featured Venues | 1498–2470 | **96.6%** |
-| CTA banner | 2471–2995 | **69.2%** |
-| Footer | 2996–3551 | **92.0%** |
-| **Overall** | | **90.2%** |
+| Nav | 0–78 | **96.50%** |
+| Hero | 78–842 | **88.21%** |
+| *authored — List Your Court Today* | *+557px* | *not scored* |
+| How It Works | 843–1497 | **98.14%** |
+| Featured Venues | 1498–2470 | **96.24%** |
+| CTA banner | 2471–2995 | **66.25%** |
+| Footer | 2996–3554 | **92.03%** |
+| **Overall (cloned bands only)** | | **89.779%** |
+
+Two owner-requested deviations move these numbers in opposite directions: centring the CTA
+panel cost that band 69.16% → 66.25%, while swapping the basketball court icon for the
+tennis court the owner asked for *gained* How It Works 97.73% → 98.14%.
 
 Layout, type, and colour are effectively exact — every section origin lands within
 3px of the design. The residual is concentrated in the two **photographic** bands
-(hero, CTA); see *Known gaps*.
+(hero, CTA); see *Known gaps*. Featured Venues stepped down from 96.58% when the
+price disclaimer was added under each rate chip — the design render has no disclaimer,
+so that delta is intended, not a regression.
 
 ## How the values were derived
 
@@ -172,6 +187,10 @@ pattern, **not a scannable QR**. Admin and account data are fixtures.
 
 **Open product decision:** there is still no mobile menu. Nav links hide below 1120px on
 every page because neither document specifies a pattern for one.
+
+> **Resolved in the next entry.** The accessibility pass below shipped a hamburger +
+> slide-in drawer (`js/nav.js`), so this is no longer open. Left in place because these
+> entries are a chronological log, but do not read this line as current status.
 
 ---
 
@@ -392,3 +411,231 @@ The responsive overrides were rewritten too; they still assumed the old
 `rotate(90deg)`/`transform-origin:center` contract and would have flipped the word back
 below 1920px. The mark now anchors with `left: calc(100% - 176px)` so it tracks the right
 edge at every width.
+
+---
+
+# Owner-facing round — 15 September 2026
+
+Six owner-requested changes. All four gates green afterwards: `verify` **90.134%**,
+`check-pages`, `check-a11y`, `check-auth` all pass.
+
+## Court owner sign-up — `signup-owner.html` (new)
+
+A separate page rather than a state of `signup.html`, by owner decision; `signup.html` is
+byte-unchanged and still defaults to Player. Reuses the existing `auth-signup.jpg` — it
+turned out to already be the photo in the comp, so no new asset was needed. Left panel
+carries the owner pitch (100% free listing, 5% processing fee), subhead reads "List your
+court", and Court Owner is preselected. `check-auth.mjs` gained 13 assertions covering it.
+
+`List Your Court` in the nav and homepage now points here instead of `admin.html`
+(4 call sites: 2 in `js/chrome.js`, 2 inline in `index.html`).
+
+**Deliberately not done:** the role radios do not cross-navigate between the two pages.
+Making a radio change the page is a WCAG 3.2.2 context change and would fire on arrow-key
+navigation through the radiogroup. They stay form state, exactly as `signup.html` already
+treats them — the role still drives the post-submit destination (owner → admin, player →
+account). A one-line change if you want it anyway.
+
+## Homepage — "List Your Court Today" section
+
+Authored section, **not in the Figma source**, inserted between hero and How It Works.
+Reuses the How-It-Works card system including its 368/336/336 button-width quirk, so it
+sits in the existing design language. Cards grow to 352px because card 3 carries a
+two-line heading and the grid stretches all three. All three CTAs point at
+`signup-owner.html`. Two icons (pencil-in-square, QR grid) are hand-authored inline SVG
+stand-ins; the orange tile reuses the real `icon-court.png`.
+
+This is what forced the `verify.mjs` rework described under *Fidelity*. The six cloned
+bands returned to their exact pre-change scores under the offset, which is what confirms
+the offset is right rather than merely plausible.
+
+## Price disclaimer — "*exclusive of tax and fees"
+
+On every surface showing an hourly rate: the listing cards (`js/app.js`), both price
+positions on the court pages (`gen-courts.mjs`), and the three homepage Featured chips.
+Booking totals, checkout, account history and admin revenue were left alone.
+
+The homepage note sits on a photo, and plain white text there measured **1.01:1** against
+the brightest part of the image — invisible in practice. A text-shadow reads as adequate
+on a mid-tone and fails outright over highlights, so the note carries its own backing
+pill instead: **7.69:1 worst case** across the text area, clearing AA and AAA.
+
+## Individual court pages — header removed
+
+`gen-courts.mjs` no longer emits the `#site-nav` slot, and `chrome.js` only injects where
+it finds one, so omitting the slot *is* the mechanism. The footer still renders and the
+breadcrumb carries navigation. `nav.js` already returned early when it finds no
+`.nav__inner`, after adding the skip link, so the skip link survives.
+
+`check-pages.mjs` asserts the intent rather than relaxing the check: court pages must have
+no header *and* a footer, so an accidentally-restored header now fails too.
+
+**Consequence worth knowing:** there is no mobile drawer on court pages, because the
+drawer is built from the nav markup. Below 1120px the breadcrumb is the only navigation.
+
+## Individual court pages — "Add a reservation" CTA
+
+Second CTA in the booking card, outline style, existing palette. Resolves to `admin.html`
+— manual and walk-in entry is an owner job with no dedicated screen, so it follows the
+same nearest-real-page rule as the nav.
+
+The reference image showed this beside "Open venue dashboard" and "Manage availability" in
+a lime-green owner edit-mode that **does not exist in this build**, so only the named
+button was added. The lime is `#B7D60F`, a per-venue brand colour picked by the owner in
+that edit-mode — not a Served palette colour. Building that mode is unscoped work.
+
+## Individual court pages — "More about <venue>" facilities section
+
+After Amenities, driven by a new `facilities` array in `js/data.js`. Four-up grid tuned so
+a four-facility venue fits one row instead of orphaning a 3+1.
+
+**Both the copy and the images are placeholders.** `img` is null on every entry and the
+card falls back to a designed icon tile, because there is no shop/café/lounge photography
+in `assets/` and captioning a court photo "Café" would read as a bug rather than a
+placeholder. Set `img` to a real path and the card uses it with no other change.
+
+## Also fixed while in here
+
+`verify.mjs` registered its console-error listener *after* the screenshot, so load-time
+errors were never captured and `consoleErrors: []` was meaningless. Moved before
+navigation and a `pageerror` handler added. It still reports zero — now that means something.
+
+---
+
+# Booking & admin round — 16 September 2026
+
+All four gates green: `verify` **90.134%**, `check-pages`, `check-a11y`, `check-auth`.
+
+## Step 2 — book several courts and times at once
+
+`booking-time.html` is now multi-select. Pick a court, tap every slot you want on it,
+switch court and add more; picks accumulate in "Your selection" as removable lines and
+survive the court switch. The draft carries `picks: [{court, slot}]`; `draft.court` and
+`draft.slot` remain as readable roll-ups. Checkout and confirmation list every booking.
+
+**The Duration dropdown is gone, and that closed a real bug.** `paintSlots()` only ever
+disabled slots taken on the selected court; the duration multiplier billed for the
+following hours without checking they were free. On Court A, day 15, picking 11:00–12:00
+with "2 hours" silently charged for 12:00–13:00, which is already taken. One slot is now
+one hour, so every booked hour is individually checked. The funnel test was rewritten
+accordingly — two slots rather than `duration=2`, same ₱1,400 — plus a new multi-court
+block covering accumulation across courts, removal from the summary, and the whole thing
+carried through to confirmation.
+
+## Admin bookings ledger
+
+Was six hardcoded rows. Now driven by `SERVED.bookings` (22 across August 2026) with
+date-range filtering for reporting, search by reference or customer name, a status
+filter, and a live count carrying a revenue subtotal for the filtered range.
+
+Each live row offers **Revise** (date / time / court, in a native `<dialog>` for the
+focus trap and Escape) and **Cancel**. A revision that would land on another live booking
+for the same court and slot is refused with an explanation rather than silently
+double-booking. Cancelling clears the amount and removes the row's actions.
+
+**Status is binary — Paid or Cancelled, no Pending.** Nothing reaches this ledger until
+payment succeeds, so a payment that never completed leaves no booking rather than a
+pending one. *("Pending review" on venues and "Pending KYC" on users are different
+tables and were left alone.)*
+
+Revisions and cancellations are in-memory for the page only — stated on the page itself.
+
+## Admin Performance panel
+
+Replaces the old "Revenue — last 6 months" CSS bar chart, which was six styled `<div>`s
+that could not draw a line. Now inline SVG with Bookings/Revenue, Day/Week/Month/Year and
+**Bar/Line** toggles, per-period change against the period before it, hover tooltip and a
+screen-reader table.
+
+Built against the `dataviz` skill, which mandates running the palette validator rather
+than eyeballing it:
+
+- **One measure at a time.** The metric toggle swaps the series instead of drawing a
+  second y-axis — bookings and revenue are different scales, and a dual axis is the
+  single worst chart mistake.
+- **Colour** is brand orange for periods that grew and `--muted` for periods that fell.
+  The validator FAILs the muted step on its chroma floor ("reads gray") — deliberate and
+  accepted: it marks a de-emphasised state, not a second categorical series, and the
+  validator grades categorical palettes. CVD separation is ΔE 26.8 normal / 17.2 protan
+  against the ≥8 target. Direction is never colour-alone — every label carries ▲/▼ and a
+  signed percentage.
+- The validator's contrast WARN on `#ff7315` (2.65:1) is the same brand-orange problem
+  already open under *NOT fixed — needs your decision*. The skill says that WARN obliges
+  visible labels or a table view; both ship.
+
+**The fixture data is reconciled with the page it sits on.** Aug 26 lands on 152 bookings
+/ ₱106,400 and the month-on-month deltas come out at the +12% and +8% the tiles above
+claim, and the Month/Revenue view reproduces the retired chart's six figures exactly.
+Bookings and revenue are separate series rather than revenue = bookings × 700, because
+the venues charge ₱600–₱950 — a flat multiple would force both metrics to show the same
+percentage, which is exactly the contradiction the two tiles already had.
+
+**Rendering bug found by looking at it (chart round):** `styles.css:51` sets a global
+`svg{fill:none;stroke:currentColor}` for icons. Inherited into the chart it outlined every
+number and painted the transparent hover hit-targets as visible boxes. Killing inheritance
+on `.perf__svg` is enough — marks that need a stroke carry it inline, which still wins.
+A `display:flex` on the ledger's actions `<td>` likewise dropped that cell out of the
+table's column model and overflowed the border; it is a normal cell again.
+
+---
+
+# Polish round — 16 September 2026
+
+All four gates green. Fidelity moved: **90.134% → 89.779%**, two changes pulling opposite
+ways (below). The table under *Fidelity* reflects the current numbers.
+
+## Role toggle now switches between the two sign-up pages
+
+Both directions: Player on the owner page opens `signup.html`, Court Owner on the player
+page opens `signup-owner.html`. This reverses the earlier "deliberately not done" note —
+the owner asked for it, so it is built, but built properly.
+
+**The a11y problem is real and the first fix was wrong.** A radiogroup changes selection
+on arrow keys, so naive navigation throws a keyboard user off the page for merely browsing
+the options (WCAG 3.2.2). The first attempt gated navigation on "explicit activation"
+(pointer / Enter / Space) so arrow keys could browse without leaving. Testing killed it:
+**Space on an already-checked radio fires no click event**, and Enter submits the form
+rather than activating the radio — so a keyboard user could move the selection and then
+had no way to act on it, stranded on the wrong page with the wrong role selected. Worse
+than the problem being avoided.
+
+It now fires on `change`, which covers arrow keys. That conforms because the group carries
+an advance description (`aria-describedby` on `.roles`) saying what will happen — 3.2.2
+permits a context change the user was told about. With only two options there is no
+browse-without-choosing case anyway: moving the selection *is* choosing the other page.
+
+This broke an existing gate assertion, which is the point of having one: the old sign-up
+test clicked Court Owner on `signup.html` to check the owner→admin destination, and that
+click now navigates. That block tests the player path on the player page; owner→admin is
+asserted in the court-owner section where it belongs.
+
+## Tax and processing fee breakdown at checkout
+
+Order summary now reads Subtotal → VAT → Processing fee → Total, and confirmation shows
+the same breakdown so the two can never disagree. `booking-time`'s "Total" was relabelled
+**Subtotal** with a note that tax and fees are added at checkout — otherwise it contradicted
+the checkout total outright.
+
+Rates live in one place, `SERVED.charges`, and both are **unconfirmed**: 12% is the
+Philippine VAT rate, 5% is the fee the court-owner page promises. Neither has been checked
+against an acquirer or the governing BSP circular, and the acquirer is still undecided —
+see *Not decided yet*. Each line is rounded to the peso and the total is the sum of the
+**rounded** lines, so the figures a customer reads always add up; a gate asserts exactly that.
+
+## CTA panel centred — a deliberate deviation, and it costs match
+
+The Figma render places the panel at `left:437px` — a 437/383 gutter split, 27px right of
+centre. Centring it on owner request drops the CTA band **69.16% → 66.25%**. It now uses
+`left:50%` + `translateX(-50%)`, which is what the ≤1440px breakpoint already did, so
+desktop is no longer the special case.
+
+## Court icon is a tennis court — and the design agreed all along
+
+`icon-court.png` drew a *basketball* court: centre circle, two keys with arcs. The owner
+asked for a tennis court (doubles alleys, service boxes, centre service line). Rebuilt as
+`assets/img/icon-court.svg`, proportions measured off the reference — court at 79% of the
+tile width, 55% of its height, stroke ~3% of court width.
+
+**How It Works went 97.73% → 98.14%.** Changing artwork inside a pixel-verified band was
+expected to cost match; it gained. The Figma render evidently always had a tennis court and
+the extracted PNG was simply the wrong asset. The old PNG is left in `assets/img/` unused.

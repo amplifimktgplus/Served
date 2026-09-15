@@ -39,7 +39,8 @@
     <div class="book-grid">
       <div class="panel">
         <h2>Available times</h2>
-        <p class="panel__sub">Struck-through slots are already taken on the selected court.</p>
+        <p class="panel__sub">Tap as many times as you like. Struck-through slots are
+          already taken on the selected court.</p>
 
         <div class="pickgrid">
           <div class="slots-wrap">
@@ -49,16 +50,8 @@
           <div>
             <h3>Court selection</h3>
             <div class="courtpick" id="courts" role="group" aria-label="Court"></div>
-
-            <h3 style="margin-top:22px">Duration</h3>
-            <div class="field">
-              <label class="sr-only" for="dur">Duration</label>
-              <select id="dur">
-                <option value="1">1 hour</option>
-                <option value="2">2 hours</option>
-                <option value="3">3 hours</option>
-              </select>
-            </div>
+            <p class="pick-hint">Pick a court, then tap every time you want on it.
+              Switch court to add more — your picks are kept.</p>
           </div>
         </div>
       </div>
@@ -68,12 +61,17 @@
         <p class="panel__sub">Nothing is reserved until payment.</p>
         <div class="kv" style="margin-top:20px"><span>Venue</span><b data-venue-name>—</b></div>
         <div class="kv"><span>Date</span><b data-date-label>—</b></div>
-        <div class="kv"><span>Court</span><b id="sum-court">—</b></div>
-        <div class="kv"><span>Time</span><b id="sum-slot">—</b></div>
-        <div class="kv"><span>Duration</span><b id="sum-dur">—</b></div>
+
+        <ul class="picks" id="picks"></ul>
+        <p class="picks__empty" id="picks-empty">No times picked yet.</p>
+        <p class="sr-only" id="picks-live" aria-live="polite"></p>
+
+        <div class="kv"><span>Booked</span><b id="sum-count">—</b></div>
         <div class="summary">
-          <div class="total"><span>Total</span><b id="sum-total">₱0</b></div>
+          <div class="total"><span>Subtotal</span><b id="sum-total">₱0</b></div>
         </div>
+        <p class="picks__empty" style="margin-top:10px">Tax and the processing fee are
+          added at checkout.</p>
         <a class="btn btn--orange is-off" id="to-pay" href="checkout.html"
            style="width:100%;height:52px;border-radius:12px;font-size:17px;font-weight:600;margin-top:20px">
           Continue to payment
