@@ -187,6 +187,16 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
    That inconsistency exists in the Figma file and is reproduced verbatim. */
 .hiw-card .btn--wide1{ width:368px; }
 
+/* ------------------------------ LIST YOUR COURT TODAY (authored section)
+   NOT in the Figma source — added after the pixel baseline, which is why
+   verify.mjs offsets every band below it. Reuses the How-It-Works card
+   system; the cards grow past the cloned 348px because card 3 carries a
+   two-line heading, and the grid stretches all three to match. */
+.own{ padding-bottom:0; }
+.own .hiw-card{ height:auto; min-height:348px; }
+.own .hiw-card h3{ line-height:30px; }
+.hiw-card__tile svg{ width:46px; height:46px; color:#fff; }
+
 /* ==================================================== FEATURED VENUES === */
 .feat{ background:var(--band); padding-top:111px; padding-bottom:40px; }
 .feat .sec-sub{ margin-top:17px; }
@@ -223,6 +233,18 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
 .chip--blue{ left:24px; background:var(--blue); }
 .chip--price{ right:24px; background:var(--orange); font-weight:600; }
 .chip--price span{ font-weight:400; margin-left:3px; }
+/* Price disclaimer — authored, NOT in the Figma render, so it moves the
+   featured band off its cloned match. Sits directly under the price chip so it
+   reads as a footnote to the rate rather than free-floating on the photo.
+   Plain white text here measured 1.01:1 against the brightest part of the
+   photo, so it carries its own backing rather than relying on a text-shadow —
+   a shadow reads as legible on a mid-tone but fails outright over highlights. */
+.chip-note{
+  position:absolute; top:62px; right:24px;
+  padding:3px 8px; border-radius:6px;
+  background:rgba(0,0,0,.66);
+  font-size:12px; font-weight:400; color:#fff; letter-spacing:.1px;
+}
 
 .venue__body{ padding:24px; display:flex; flex-direction:column; flex:1; }
 .venue__rate{ display:flex; align-items:center; gap:10px; }
@@ -282,27 +304,18 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
   background:linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.06) 45%, rgba(0,0,0,.52) 100%);
 }
 .cta__mark{
-  /* Was a hard 1980px/-30px/117px lifted off the 1920 frame, which meant that
-     between 1025px and 1919px the watermark stayed at full size and cropped to
-     unreadable black blobs. Now expressed proportionally so it scales with the
-     band: 103.125% of 1920 = 1980px and centring puts its left edge at -30px,
-     while translateY(19.4%) of the mark's own height = 117px — so the 1920
-     render is pixel-identical to the design, and every narrower width gets the
-     same watermark, just smaller. */
-  position:absolute; left:50%; top:0;
-  width:103.125%; max-width:none; z-index:1; opacity:.95; filter:brightness(0);
-  transform:translateX(-50%) translateY(19.4%);
+  position:absolute; left:-30px; top:117px;
+  width:1980px; max-width:none; z-index:1; opacity:.95; filter:brightness(0);
   pointer-events:none;
 }
+/* Centred by owner request. The Figma render places this panel at left:437px —
+   a 437/383 gutter split, i.e. 27px right of centre — so centring is a deliberate
+   deviation from the design and costs a little of the CTA band's pixel match.
+   left:50% + translateX keeps it centred at every width instead of at 1920 only. */
 .cta__panel{
-  /* the Figma frame put this at left:437px, which is 54px right of centre in a
-     1920 band (437 vs 383). Centred at every width now — the ≤1440 rule below
-     already did this, so the two no longer disagree.
-     align-items:center stops the benefits column from stretching and leaving a
-     void under the Join button: both columns now sit centred in the panel. */
-  position:absolute; z-index:2; left:50%; top:95px; transform:translateX(-50%);
+  position:absolute; z-index:2; left:50%; transform:translateX(-50%); top:95px;
   width:1100px; height:415px; padding:45px 40px 33px 36px;
-  display:grid; grid-template-columns:628px 1fr; column-gap:32px; align-items:center;
+  display:grid; grid-template-columns:628px 1fr; column-gap:32px;
   border-radius:28px;
   background:linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.06) 55%, rgba(20,16,10,.16));
   border:1px solid rgba(255,255,255,.24);
@@ -321,7 +334,7 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
 .cta__body{ margin-top:9px; font-size:20px; line-height:25px; font-weight:300; color:#efefef; max-width:520px; }
 
 .cta__left,.cta__right{ min-width:0; }
-.cta__right{ padding-top:0; }   /* was a 6px nudge; align-items:center supersedes it */
+.cta__right{ padding-top:6px; }
 .cta__benefit-head{ font-size:16px; font-weight:600; }
 .cta__benefits{ margin-top:19px; display:flex; flex-direction:column; gap:19px; }
 .cta__benefits li{
@@ -336,9 +349,7 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
 .btn--join{ margin-top:36px; width:312px; max-width:100%; height:44px; font-size:16px; font-weight:500; border-radius:8px; }
 
 /* =========================================================== FOOTER ==== */
-/* was 249px off the Figma frame — too much dead black between the CTA band and
-   the footer columns. Tightened; the footer wordmark still has room to breathe. */
-.foot{ background:var(--foot-bg); color:#fff; padding-top:176px; }
+.foot{ background:var(--foot-bg); color:#fff; padding-top:249px; }
 .foot__shell{ width:1674px; margin-inline:auto; }
 .foot__grid{
   display:grid;
@@ -435,7 +446,9 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
   .foot__bar{ margin-top:56px; }
 }
 
-/* .cta__mark used to be stepped down here and at 820px; it now scales fluidly */
+@media (max-width:1024px){
+  .cta__mark{ width:1400px; left:-140px; }
+}
 @media (max-width:820px){
   .hiw,.feat{ padding-top:72px; padding-bottom:72px; }
   .sec-title{ font-size:28px; line-height:34px; }
@@ -446,6 +459,7 @@ svg{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; str
   .search__divider{ width:100%; height:1px; margin:0; align-self:auto; }
   .search__btn{ width:100%; height:52px; }
   .hero__mark{ display:none; }
+  .cta__mark{ width:900px; left:-90px; }
 }
 
 @media (max-width:640px){

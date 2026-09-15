@@ -4,18 +4,52 @@ Static rebuild of the **Served.** homepage from `Home Page - Sample.pdf`
 (a Figma export: 1 page, MediaBox **1920 × 3554**, 1pt = 1px).
 
 ```
-index.html            the page
-css/styles.css        all styles (desktop = measured; responsive = derived)
+*.html                19 pages — see the Pages table below
+css/                  styles.css (verified homepage) + pages, auth, a11y layers
+js/                   data fixtures, shared chrome, page behaviour, nav drawer
 assets/img/           images extracted from the PDF
 verify.mjs            renders headless at 1920 and pixel-diffs vs the design
+check-pages.mjs       whole-site gate: funnel, bookings ledger, chart, links
+check-a11y.mjs        focus rings, drawer, hit areas, heading order
+check-auth.mjs        the auth screens and the role switch
+gen-courts.mjs        re-emits the six court pages from js/data.js
 probe.mjs             reports built geometry vs measured design targets
 typetune.mjs          solves font-size per text style from measured string widths
-_reference/           design render, crops, measurement scripts (not shipped)
-_verify/              diff output (not shipped)
+_reference/           page-1x.png — the 1:1 Figma render verify.mjs diffs against
+                      layout-map.json — the measured bands and colours
+_verify/              diff output — generated, gitignored
 ```
 
-Run `node verify.mjs` to reproduce the match figures below.
-(`node_modules` is symlinked to the clone-site skill's; it needs `playwright`, `pngjs`, `pixelmatch`.)
+The one-off Python measurement scripts that produced the figures in *How the values
+were derived* are not in this repo: they hardcoded local paths and needed ~200MB of
+source exports (`page-2x.png`, `raw-img/`, `crops/`) that aren't shipped. The method
+they implement is written up below; `layout-map.json` is their output.
+
+## Getting started
+
+```bash
+npm install
+npx playwright install chromium   # the gates drive a real browser
+npm run check                     # runs all four gates
+```
+
+The site is static — no build step and no server required. Open `index.html`
+directly, or serve the folder with anything (`npx serve .`).
+
+| Command | What it does |
+|---|---|
+| `npm run verify` | pixel-diffs the homepage against the Figma render |
+| `npm run check:pages` | whole-site gate — booking funnel, admin ledger, chart, links |
+| `npm run check:a11y` | accessibility gate |
+| `npm run check:auth` | auth screens + role switch |
+| `npm run check` | all four, in order |
+| `npm run gen:courts` | regenerate the court pages after editing `js/data.js` |
+
+`verify.mjs` writes its diff and report into `_verify/`, which is gitignored.
+
+**No backend.** Payment, auth, admin figures, the confirmation code and the
+bookings ledger are all UI only — see *Still missing a backend* and
+*Not decided yet* below for exactly what a live build still needs.
 
 ## Fidelity
 
