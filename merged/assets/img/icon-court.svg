@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="90" height="90" role="img" aria-label="Tennis court">
+  <!-- Tennis court seen from above, net running vertically. Replaces the
+       basketball-court PNG that shipped with the Figma artwork.
+         outer rect      doubles sidelines + baselines
+         two h-lines     singles sidelines, leaving the doubles alleys
+         centre v-line   the net, crossing the alleys
+         two v-lines     service lines, only between the singles sidelines
+         centre h-line   centre service line, between the service lines
+       Proportions measured off the reference: the court fills 79% of the tile
+       width and 55% of its height, with a stroke ~3% of the court width. -->
+  <g fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="square">
+    <rect x="9.5" y="20.25" width="71" height="49.5"/>
+    <path d="M9.5 28.05h71M9.5 61.95h71"/>
+    <path d="M45 20.25v49.5"/>
+    <path d="M25.9 28.05v33.9M64.1 28.05v33.9"/>
+    <path d="M25.9 45h38.2"/>
+  </g>
+</svg>

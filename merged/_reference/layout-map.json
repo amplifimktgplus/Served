@@ -1,0 +1,594 @@
+{
+ "page": {
+  "w": 1920,
+  "h": 3554
+ },
+ "bands": [
+  {
+   "y0": 0,
+   "y1": 73,
+   "hex": "#050505"
+  },
+  {
+   "y0": 74,
+   "y1": 178,
+   "hex": "#121212"
+  },
+  {
+   "y0": 179,
+   "y1": 352,
+   "hex": "#0b0b0b"
+  },
+  {
+   "y0": 353,
+   "y1": 372,
+   "hex": "#121212"
+  },
+  {
+   "y0": 373,
+   "y1": 464,
+   "hex": "#0b0b0b"
+  },
+  {
+   "y0": 465,
+   "y1": 479,
+   "hex": "#121212"
+  },
+  {
+   "y0": 482,
+   "y1": 495,
+   "hex": "#131313"
+  },
+  {
+   "y0": 499,
+   "y1": 541,
+   "hex": "#111111"
+  },
+  {
+   "y0": 560,
+   "y1": 600,
+   "hex": "#0e0e0e"
+  },
+  {
+   "y0": 601,
+   "y1": 616,
+   "hex": "#070707"
+  },
+  {
+   "y0": 634,
+   "y1": 819,
+   "hex": "#0b0b0b"
+  },
+  {
+   "y0": 822,
+   "y1": 1497,
+   "hex": "#ffffff"
+  },
+  {
+   "y0": 1498,
+   "y1": 2491,
+   "hex": "#f1f1ef"
+  },
+  {
+   "y0": 2533,
+   "y1": 2551,
+   "hex": "#4d4230"
+  },
+  {
+   "y0": 2552,
+   "y1": 2570,
+   "hex": "#473b2b"
+  },
+  {
+   "y0": 2584,
+   "y1": 2598,
+   "hex": "#40362a"
+  },
+  {
+   "y0": 2602,
+   "y1": 2612,
+   "hex": "#40342b"
+  },
+  {
+   "y0": 2640,
+   "y1": 2648,
+   "hex": "#47382a"
+  },
+  {
+   "y0": 2655,
+   "y1": 2664,
+   "hex": "#453621"
+  },
+  {
+   "y0": 2671,
+   "y1": 2679,
+   "hex": "#473c2a"
+  },
+  {
+   "y0": 2680,
+   "y1": 2697,
+   "hex": "#413622"
+  },
+  {
+   "y0": 2715,
+   "y1": 2741,
+   "hex": "#3e3222"
+  },
+  {
+   "y0": 2742,
+   "y1": 2756,
+   "hex": "#372b1d"
+  },
+  {
+   "y0": 2760,
+   "y1": 2767,
+   "hex": "#372919"
+  },
+  {
+   "y0": 2771,
+   "y1": 2802,
+   "hex": "#362919"
+  },
+  {
+   "y0": 2803,
+   "y1": 2820,
+   "hex": "#2f2513"
+  },
+  {
+   "y0": 2821,
+   "y1": 2829,
+   "hex": "#362318"
+  },
+  {
+   "y0": 2830,
+   "y1": 2846,
+   "hex": "#312411"
+  },
+  {
+   "y0": 2847,
+   "y1": 2855,
+   "hex": "#362b17"
+  },
+  {
+   "y0": 2856,
+   "y1": 2868,
+   "hex": "#37321c"
+  },
+  {
+   "y0": 2904,
+   "y1": 2912,
+   "hex": "#332615"
+  },
+  {
+   "y0": 2915,
+   "y1": 3553,
+   "hex": "#070605"
+  }
+ ],
+ "orange": "#ff7315",
+ "text_lines": [
+  {
+   "x": 512.5,
+   "y": 23.4,
+   "x2": 1864.5,
+   "y2": 50.3,
+   "w": 1352.0,
+   "h": 26.8,
+   "t": "HomeCourtsPricingListYourCourtContactUsLogin/RegisterListYourCourt"
+  },
+  {
+   "x": 318.0,
+   "y": 256.6,
+   "x2": 557.4,
+   "y2": 287.6,
+   "w": 239.4,
+   "h": 30.9,
+   "t": "Everycourt.Onetapaway."
+  },
+  {
+   "x": 318.0,
+   "y": 291.0,
+   "x2": 845.0,
+   "y2": 394.0,
+   "w": 527.0,
+   "h": 103.0,
+   "t": "ChooseyourCourt\n"
+  },
+  {
+   "x": 318.0,
+   "y": 369.0,
+   "x2": 846.4,
+   "y2": 472.0,
+   "w": 528.4,
+   "h": 103.0,
+   "t": "GetreadytoPlay."
+  },
+  {
+   "x": 318.0,
+   "y": 493.0,
+   "x2": 1033.0,
+   "y2": 502.9,
+   "w": 715.0,
+   "h": 9.9,
+   "t": "Nocalls,nowaiting,noguesswork.Bookinstantlyandgetonthecourtinminutes."
+  },
+  {
+   "x": 338.0,
+   "y": 538.8,
+   "x2": 733.9,
+   "y2": 565.4,
+   "w": 395.9,
+   "h": 26.6,
+   "t": "EnterCourtNameWhere"
+  },
+  {
+   "x": 338.0,
+   "y": 570.1,
+   "x2": 785.2,
+   "y2": 594.9,
+   "w": 447.2,
+   "h": 24.8,
+   "t": "CourtsEnterlocation"
+  },
+  {
+   "x": 817.5,
+   "y": 917.8,
+   "x2": 1102.2,
+   "y2": 967.3,
+   "w": 284.7,
+   "h": 49.5,
+   "t": "HowServed.Works"
+  },
+  {
+   "x": 699.1,
+   "y": 989.8,
+   "x2": 1220.9,
+   "y2": 999.7,
+   "w": 521.8,
+   "h": 9.9,
+   "t": "Bookacourt,runyourgame,nocalls,nowaiting,nohassle."
+  },
+  {
+   "x": 455.5,
+   "y": 1176.9,
+   "x2": 1463.7,
+   "y2": 1214.0,
+   "w": 1008.2,
+   "h": 37.1,
+   "t": "TheSignUpFindYourCourtBook&amp;Play"
+  },
+  {
+   "x": 360.4,
+   "y": 1222.9,
+   "x2": 1513.0,
+   "y2": 1247.7,
+   "w": 1152.6,
+   "h": 24.8,
+   "t": "Createyouraccountinseconds.RegisterasaSearchbysport,location,oravailability.EveryPickyourslot,lockitin,showup.\n"
+  },
+  {
+   "x": 341.3,
+   "y": 1242.9,
+   "x2": 1502.7,
+   "y2": 1267.7,
+   "w": 1161.4,
+   "h": 24.8,
+   "t": "Playertostartbooking,orasaCourtOwnertogetcourtonServedisreal,verified,\nThat&apos;sit,yourcourtisserved.\n"
+  },
+  {
+   "x": 455.7,
+   "y": 1275.2,
+   "x2": 1026.7,
+   "y2": 1283.1,
+   "w": 571.0,
+   "h": 7.9,
+   "t": "yourfacilitylisted.andreadytobook."
+  },
+  {
+   "x": 461.1,
+   "y": 1326.9,
+   "x2": 1424.3,
+   "y2": 1351.7,
+   "w": 963.2,
+   "h": 24.8,
+   "t": "RegisterNowSeeAllCourtsBookNow"
+  },
+  {
+   "x": 837.0,
+   "y": 1634.9,
+   "x2": 1083.0,
+   "y2": 1650.8,
+   "w": 246.0,
+   "h": 15.8,
+   "t": "FeaturedVenues"
+  },
+  {
+   "x": 653.9,
+   "y": 1682.3,
+   "x2": 1266.2,
+   "y2": 1692.2,
+   "w": 612.3,
+   "h": 9.9,
+   "t": "Advancedsportsvenuesofferthelatestfacilities,dynamicandunique"
+  },
+  {
+   "x": 724.3,
+   "y": 1707.3,
+   "x2": 1195.7,
+   "y2": 1717.2,
+   "w": 471.4,
+   "h": 9.9,
+   "t": "environmentsforenhancedbadmintonperformance."
+  },
+  {
+   "x": 346.1,
+   "y": 1799.9,
+   "x2": 1573.6,
+   "y2": 1808.9,
+   "w": 1227.4,
+   "h": 8.9,
+   "t": "Featured\u20b1700/hrTopRated\u20b1700/hr\u20b1700/hr"
+  },
+  {
+   "x": 346.3,
+   "y": 2060.9,
+   "x2": 1328.7,
+   "y2": 2069.4,
+   "w": 982.4,
+   "h": 8.4,
+   "t": "4.2300Reviews5.0150Reviews4.7120Reviews"
+  },
+  {
+   "x": 336.0,
+   "y": 2107.8,
+   "x2": 1543.5,
+   "y2": 2119.7,
+   "w": 1207.5,
+   "h": 11.9,
+   "t": "VantagePickleballMarikinaUPDilimanTennisCourtPicoDeLoroBadmintonCourt"
+  },
+  {
+   "x": 336.0,
+   "y": 2147.7,
+   "x2": 1558.1,
+   "y2": 2155.6,
+   "w": 1222.1,
+   "h": 7.9,
+   "t": "SedutperspiciatisundeomnisistenatuserrorsitSedutperspiciatisundeomnisistenatuserrorsitSedutperspiciatisundeomnisistenatuserrorsit"
+  },
+  {
+   "x": 336.0,
+   "y": 2167.7,
+   "x2": 1566.0,
+   "y2": 2175.6,
+   "w": 1230.0,
+   "h": 7.9,
+   "t": "voluptatemaccusantiumdoloremquelaudantium.voluptatemaccusantiumdoloremquelaudantium.voluptatemaccusantiumdoloremquelaudantium."
+  },
+  {
+   "x": 357.1,
+   "y": 2201.4,
+   "x2": 1358.7,
+   "y2": 2208.4,
+   "w": 1001.5,
+   "h": 6.9,
+   "t": "1FVRRd,MarikinaUPDiliman,QCNasugbu,Batangas"
+  },
+  {
+   "x": 357.5,
+   "y": 2234.4,
+   "x2": 1442.6,
+   "y2": 2241.4,
+   "w": 1085.2,
+   "h": 6.9,
+   "t": "Nextavailablity:30August2026Nextavailablity:24August2026Nextavailablity:26August2026"
+  },
+  {
+   "x": 494.5,
+   "y": 2295.7,
+   "x2": 1446.2,
+   "y2": 2303.6,
+   "w": 951.7,
+   "h": 7.9,
+   "t": "BookNowBookNowBookNow"
+  },
+  {
+   "x": 884.0,
+   "y": 2404.7,
+   "x2": 1009.0,
+   "y2": 2412.6,
+   "w": 125.0,
+   "h": 7.9,
+   "t": "ViewAllFeatured"
+  },
+  {
+   "x": 489.0,
+   "y": 2637.2,
+   "x2": 672.8,
+   "y2": 2645.1,
+   "w": 183.8,
+   "h": 7.9,
+   "t": "REGISTERYOURCOURT"
+  },
+  {
+   "x": 1173.7,
+   "y": 2661.7,
+   "x2": 1240.7,
+   "y2": 2689.5,
+   "w": 67.0,
+   "h": 27.8,
+   "t": "fif:"
+  },
+  {
+   "x": 473.0,
+   "y": 2667.8,
+   "x2": 765.9,
+   "y2": 2752.9,
+   "w": 292.9,
+   "h": 85.1,
+   "t": "WeAlready\n"
+  },
+  {
+   "x": 1133.0,
+   "y": 2675.5,
+   "x2": 1235.6,
+   "y2": 2684.4,
+   "w": 102.6,
+   "h": 8.9,
+   "t": "Benetrom"
+  },
+  {
+   "x": 1165.0,
+   "y": 2701.9,
+   "x2": 1341.7,
+   "y2": 2726.7,
+   "w": 176.7,
+   "h": 24.8,
+   "t": "IncreaseBookingVolume"
+  },
+  {
+   "x": 473.0,
+   "y": 2727.8,
+   "x2": 888.8,
+   "y2": 2812.9,
+   "w": 415.8,
+   "h": 85.1,
+   "t": "BuiltTheTraffic.\n"
+  },
+  {
+   "x": 1165.0,
+   "y": 2753.2,
+   "x2": 1257.0,
+   "y2": 2761.1,
+   "w": 92.0,
+   "h": 7.9,
+   "t": "BuildofTrust"
+  },
+  {
+   "x": 473.0,
+   "y": 2787.8,
+   "x2": 987.1,
+   "y2": 2872.9,
+   "w": 514.1,
+   "h": 85.1,
+   "t": "YouBringTheCourt."
+  },
+  {
+   "x": 1165.0,
+   "y": 2790.2,
+   "x2": 1441.2,
+   "y2": 2798.1,
+   "w": 276.2,
+   "h": 7.9,
+   "t": "SaveFundsfromcreatingastandalone"
+  },
+  {
+   "x": 1165.0,
+   "y": 2810.2,
+   "x2": 1428.5,
+   "y2": 2818.1,
+   "w": 263.5,
+   "h": 7.9,
+   "t": "bookingappandmarketingexpenses"
+  },
+  {
+   "x": 473.0,
+   "y": 2881.9,
+   "x2": 1354.2,
+   "y2": 2906.7,
+   "w": 881.2,
+   "h": 24.8,
+   "t": "SkipthecostofbuildingyourownbookingsiteandrunningJoinUsToday!"
+  },
+  {
+   "x": 473.0,
+   "y": 2895.4,
+   "x2": 974.8,
+   "y2": 2926.3,
+   "w": 501.8,
+   "h": 30.9,
+   "t": "adstofillit.ListonServedandgetinfrontofplayerswho"
+  },
+  {
+   "x": 473.0,
+   "y": 2935.8,
+   "x2": 746.1,
+   "y2": 2945.7,
+   "w": 273.1,
+   "h": 9.9,
+   "t": "arealreadylookingforacourt."
+  },
+  {
+   "x": 897.0,
+   "y": 3239.1,
+   "x2": 1546.4,
+   "y2": 3272.1,
+   "w": 649.4,
+   "h": 32.9,
+   "t": "INFOLOCATIONFOLLOWUS"
+  },
+  {
+   "x": 897.0,
+   "y": 3274.1,
+   "x2": 1375.1,
+   "y2": 3306.1,
+   "w": 478.1,
+   "h": 31.9,
+   "t": "HomeTournamentsLoremIpsumDolorSt.\u2028"
+  },
+  {
+   "x": 897.0,
+   "y": 3301.1,
+   "x2": 1377.1,
+   "y2": 3337.1,
+   "w": 480.1,
+   "h": 35.9,
+   "t": "CourtGalleryClubRankingAmet,City,Philippines"
+  },
+  {
+   "x": 148.0,
+   "y": 3340.1,
+   "x2": 1305.3,
+   "y2": 3380.8,
+   "w": 1157.3,
+   "h": 40.7,
+   "t": "Loremipsumdolorsitamet,consecteturadipiscingelit,seddoeiusmodtemporincididuntutEventsRegistrationCONTACTUS"
+  },
+  {
+   "x": 148.0,
+   "y": 3376.2,
+   "x2": 642.6,
+   "y2": 3397.8,
+   "w": 494.6,
+   "h": 21.6,
+   "t": "laboreetdoloremagnaaliqua.Utenimadminimveniam,quisnostrudexercitationullamco"
+  },
+  {
+   "x": 148.0,
+   "y": 3393.2,
+   "x2": 1348.2,
+   "y2": 3414.8,
+   "w": 1200.2,
+   "h": 21.6,
+   "t": "laborisnisiutaliquipexeacommodoconsequat.123-456-7890\n"
+  },
+  {
+   "x": 1226.6,
+   "y": 3404.1,
+   "x2": 1394.7,
+   "y2": 3434.1,
+   "w": 168.1,
+   "h": 29.9,
+   "t": "contact@gmail.com"
+  },
+  {
+   "x": 140.0,
+   "y": 3487.3,
+   "x2": 465.4,
+   "y2": 3513.9,
+   "w": 325.4,
+   "h": 26.6,
+   "t": "\u00a9Copyright-2026Served.AllRightsReserved."
+  }
+ ]
+}

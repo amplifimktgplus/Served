@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Served. — authentication screens
+   Measured from the four PNG exports (1920x1158 each):
+     split at x=948 · card w=604 (split) / 616 (centered) · card bg #f1f1ef
+     fields h=60 bg #fafafa · buttons h=51 · left glass panel x146..805 (w=660)
+   Loaded after styles.css (tokens) and a11y.css. No site nav/footer here —
+   the designs are standalone auth screens.
+   ========================================================================== */
+
+.auth{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:948fr 972fr;   /* the measured 948px split of 1920 */
+  background:#fff;
+}
+.auth--solo{ grid-template-columns:1fr; place-items:center; padding:48px 24px; }
+.auth--solo > div{ width:min(616px, 100%); }
+
+/* ------------------------------------------------------------ left panel */
+.auth__aside{
+  position:relative;
+  background:#0b0b0b;
+  overflow:hidden;
+  display:grid; align-content:center; justify-items:center;
+}
+.auth__aside img.shot{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center;
+}
+.auth__glass{
+  position:relative; z-index:1;
+  width:min(660px, 84%);
+  border-radius:12px;
+  padding:36px 40px 30px;
+  background:linear-gradient(180deg, rgba(78,76,76,.92), rgba(41,39,39,.94));
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+.auth__glass .btn{
+  width:min(574px, 100%); height:88px;
+  border-radius:10px; font-size:26px; font-weight:700;
+}
+.auth__glass p{
+  margin-top:22px;
+  font-size:20px; line-height:33px; font-weight:300; color:#ececec;
+}
+.auth__glass p.tagline{ font-size:20px; line-height:26px; margin-top:20px; }
+
+/* ----------------------------------------------------------- right panel */
+.auth__main{
+  display:grid; align-content:center; justify-items:center;
+  padding:48px 32px;
+}
+.auth__logo{ width:225px; margin-bottom:34px; filter:brightness(0); }
+.auth__logo--solo{ width:225px; margin-bottom:26px; filter:brightness(0); }
+
+.auth-card{
+  width:100%; max-width:604px;
+  background:var(--band);
+  border-radius:10px;
+  padding:32px 24px;
+}
+.auth-card--solo{ max-width:616px; padding:34px 30px; box-shadow:0 6px 26px rgba(0,0,0,.10); }
+.auth-card h1{ font-size:34px; font-weight:700; color:var(--navy); letter-spacing:-.3px; }
+.auth-card > p.sub{ margin-top:6px; font-size:20px; font-weight:300; color:var(--muted); }
+
+/* role switch */
+.roles{ display:flex; gap:16px; margin-top:26px; }
+.roles + div .auth-field{ margin-top:42px; }
+.roles label{
+  flex:1; display:flex; align-items:center; gap:12px;
+  height:62px; padding:0 18px; border-radius:12px;
+  background:#fff; border:1px solid #e6e6e4; cursor:pointer;
+  font-size:17px; color:var(--navy);
+  transition:border-color .16s ease, box-shadow .16s ease;
+}
+.roles input{ position:absolute; width:1px; height:1px; opacity:0; margin:0; }
+.roles .dot{
+  width:19px; height:19px; border-radius:50%; border:2px solid #949494; flex:none;
+  display:grid; place-items:center;
+}
+.roles .dot::after{ content:""; width:9px; height:9px; border-radius:50%; background:transparent; }
+.roles label:has(input:checked){ border-color:var(--orange); box-shadow:0 0 0 1px var(--orange); }
+.roles label:has(input:checked) .dot{ border-color:var(--orange); }
+.roles label:has(input:checked) .dot::after{ background:var(--orange); }
+.roles label:has(input:checked) span.lbl{ color:var(--orange); }
+.roles input:focus-visible + .dot{ outline:3px solid #192335; outline-offset:2px; }
+
+/* fields */
+.auth-field{ position:relative; margin-top:24px; }
+.auth-field input{
+  width:100%; height:60px;
+  border:1px solid transparent; border-radius:12px;
+  background:#fafafa; padding:0 52px 0 20px;
+  font-family:inherit; font-size:17px; font-weight:300; color:var(--navy);
+}
+.auth-field input::placeholder{ color:#6f7681; opacity:1; }
+.auth-field input:focus{ outline:none; border-color:var(--orange); }
+.auth-field input:focus-visible{ outline:3px solid #192335; outline-offset:2px; }
+.auth-field .tail{
+  position:absolute; right:16px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; display:grid; place-items:center; color:var(--muted);
+}
+button.tail{ cursor:pointer; }
+button.tail:hover{ color:var(--navy); }
+.auth-field svg{ width:20px; height:20px; }
+.auth-field.is-bad input{ border-color:#d0503f; background:#fff6f5; }
+.auth-err{ display:block; min-height:0; margin:0; font-size:13px; color:#c0392b; }
+.auth-err:not(:empty){ margin:5px 2px 0; }
+
+/* terms + remember row */
+.check{ display:flex; align-items:flex-start; gap:12px; margin-top:18px; font-size:15px; color:var(--navy); font-weight:300; }
+.check input{ width:20px; height:20px; margin:1px 0 0; accent-color:var(--orange); flex:none; cursor:pointer; }
+.rowline{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:18px; }
+.remember{ display:inline-flex; align-items:center; gap:10px; font-size:15px; color:var(--navy); font-weight:300; cursor:pointer; }
+.remember input{ position:absolute; width:1px; height:1px; opacity:0; margin:0; }
+.remember .sw{
+  width:34px; height:18px; border-radius:999px; background:#8d939c; position:relative;
+  transition:background .16s ease; flex:none;
+}
+.remember .sw::after{
+  content:""; position:absolute; top:2px; left:2px; width:14px; height:14px;
+  border-radius:50%; background:#fff; transition:transform .16s ease;
+}
+.remember input:checked + .sw{ background:var(--orange); }
+.remember input:checked + .sw::after{ transform:translateX(16px); }
+.remember input:focus-visible + .sw{ outline:3px solid #192335; outline-offset:2px; }
+.link-orange{ color:var(--orange); font-weight:500; font-size:15px; }
+.link-orange:hover{ text-decoration:underline; }
+
+/* submit */
+.auth-submit{
+  width:100%; height:51px; margin-top:24px;
+  border-radius:10px; font-size:17px; font-weight:600;
+}
+.auth-submit .ico{ width:19px; height:19px; }
+
+/* social */
+.or{ display:flex; align-items:center; gap:16px; margin-top:26px; color:var(--muted); font-size:15px; font-weight:300; }
+.or::before,.or::after{ content:""; flex:1; height:1px; background:#dcdcda; }
+.socials{ display:flex; gap:16px; justify-content:center; margin-top:18px; }
+.socials a{
+  display:inline-flex; align-items:center; gap:10px;
+  height:48px; padding:0 22px; border-radius:10px;
+  background:#fff; border:1px solid #e6e6e4;
+  font-size:16px; color:var(--navy);
+}
+.socials a:hover{ border-color:var(--navy); }
+.socials svg{ width:22px; height:22px; }
+
+.auth-foot{ margin-top:26px; text-align:center; font-size:16px; color:var(--navy); font-weight:500; }
+.auth-foot a{ color:var(--orange); font-weight:700; }
+.auth-foot a:hover{ text-decoration:underline; }
+.auth-foot--solo{ margin-top:30px; }
+
+.auth-back{
+  position:absolute; top:26px; left:26px; z-index:3;
+  display:inline-flex; align-items:center; gap:8px;
+  height:42px; padding:0 16px; border-radius:10px;
+  background:rgba(255,255,255,.92); color:var(--navy); font-size:15px; font-weight:500;
+}
+.auth-back:hover{ background:#fff; }
+.auth-back svg{ width:17px; height:17px; }
+
+/* ------------------------------------------------------------- responsive
+   DERIVED — the source PNGs are desktop-only (1920x1158). */
+@media (max-width:1100px){
+  .auth__glass{ padding:28px 26px 24px; }
+  .auth__glass .btn{ height:64px; font-size:21px; }
+  .auth__glass p{ font-size:17px; line-height:27px; }
+  .auth-card h1{ font-size:29px; }
+  .auth-card > p.sub{ font-size:17px; }
+}
+@media (max-width:900px){
+  .auth{ grid-template-columns:1fr; }
+  .auth__aside{ min-height:280px; padding:40px 20px; }
+  .auth__main{ padding:40px 20px 56px; }
+  .auth__logo{ width:176px; margin-bottom:26px; }
+}
+@media (max-width:560px){
+  .auth__aside{ min-height:220px; padding:28px 16px; }
+  .auth__glass{ width:100%; padding:22px 20px 20px; }
+  .auth__glass .btn{ height:56px; font-size:18px; }
+  .auth-card,.auth-card--solo{ padding:24px 18px; }
+  .auth-card h1{ font-size:25px; }
+  .roles{ flex-direction:column; gap:10px; }
+  .roles label{ height:56px; }
+  .socials{ flex-direction:column; }
+  .socials a{ justify-content:center; }
+  .rowline{ flex-wrap:wrap; }
+}

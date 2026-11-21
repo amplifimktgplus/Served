@@ -1,1 +1,18 @@
-{"name":"served-figma-export","private":true,"type":"module","dependencies":{"dom-to-svg":"^0.12.2"}}
+{
+  "name": "served-homepage",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "node verify.mjs",
+    "check:pages": "node check-pages.mjs",
+    "check:a11y": "node check-a11y.mjs",
+    "check:auth": "node check-auth.mjs",
+    "check": "npm run verify && npm run check:pages && npm run check:a11y && npm run check:auth",
+    "gen:courts": "node gen-courts.mjs"
+  },
+  "devDependencies": {
+    "pixelmatch": "^5.3.0",
+    "playwright": "1.63",
+    "pngjs": "^7.0.0"
+  }
+}
